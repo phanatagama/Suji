@@ -1,39 +1,45 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:suji/app/domain/entities/surah_detail.dart';
-import 'package:suji/app/domain/repository/surah_repository.dart';
-import 'package:suji/core/theme/colors.dart';
-import 'package:suji/core/utils/base_state.dart';
+import 'package:suji/app/domain/usescases/get_ayah_by_surah_number_usecase.dart';
+import 'package:suji/app/widgets/custom_snackbar.dart';
 
-class SurahController extends GetxController {
-  final SurahRepository surahRepository = Get.find<SurahRepository>();
+class SurahController extends GetxController
+    with StateMixin<List<SurahDetail>> {
+  final GetAyahBySurahNumberUsecase getAyahBySurahNumberUsecase;
 
-  final _state = BaseState.empty.obs;
-  BaseState get state => _state.value;
+  SurahController({required this.getAyahBySurahNumberUsecase});
 
-  final List<SurahDetail> _listAyat = <SurahDetail>[].obs;
-  List<SurahDetail> get listAyat => _listAyat;
+  // final _state = BaseState.empty.obs;
+  // BaseState get state => _state.value;
+
+  // final _message = ''.obs;
+  // String get message => _message.value;
+
+  // final List<SurahDetail> _listAyat = <SurahDetail>[].obs;
+  // List<SurahDetail> get listAyat => _listAyat;
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
-    getAyahBySurahNumber();
+    await getAyahBySurahNumber();
   }
 
+  /// get all ayah by surah number
   Future<void> getAyahBySurahNumber() async {
-    _state.value = BaseState.loading;
-    final result = await surahRepository
-        .getAyahBySurahNumber(int.parse(Get.parameters['number']!));
+    // _state.value = BaseState.loading;
+    change([], status: RxStatus.loading());
+    final result = await 
+        getAyahBySurahNumberUsecase.invoke(int.parse(Get.parameters['number']!));
 
     result.fold((failure) {
-      _state.value = BaseState.error;
-      Get.snackbar('Information', failure.message,
-          snackPosition: SnackPosition.BOTTOM,
-          margin: const EdgeInsets.all(8.0),
-          backgroundColor: AppColors.error);
+      // _message.value = failure.message;
+      // _state.value = BaseState.error;
+      showErrorMessage(failure.message);
+      change([], status: RxStatus.error(failure.message));
     }, (surahData) {
-      _listAyat.assignAll(surahData);
-      _state.value = BaseState.success;
+      // _listAyat.assignAll(surahData);
+      // _state.value = BaseState.success;
+      change(surahData, status: RxStatus.success());
     });
   }
 }
