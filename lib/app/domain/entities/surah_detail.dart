@@ -17,6 +17,7 @@ class SurahDetail with _$SurahDetail {
     required String nameTransliterationId,
     required String nameTranslationId,
     required String relevationId,
+    required String tafsirId,
     required String preBismillahTextArab,
     required String preBismillahAudioPrimary,
     required String versesTextArab,

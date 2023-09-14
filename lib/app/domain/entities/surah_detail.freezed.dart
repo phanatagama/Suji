@@ -27,6 +27,7 @@ mixin _$SurahDetail {
   String get nameTransliterationId => throw _privateConstructorUsedError;
   String get nameTranslationId => throw _privateConstructorUsedError;
   String get relevationId => throw _privateConstructorUsedError;
+  String get tafsirId => throw _privateConstructorUsedError;
   String get preBismillahTextArab => throw _privateConstructorUsedError;
   String get preBismillahAudioPrimary => throw _privateConstructorUsedError;
   String get versesTextArab => throw _privateConstructorUsedError;
@@ -56,6 +57,7 @@ abstract class $SurahDetailCopyWith<$Res> {
       String nameTransliterationId,
       String nameTranslationId,
       String relevationId,
+      String tafsirId,
       String preBismillahTextArab,
       String preBismillahAudioPrimary,
       String versesTextArab,
@@ -86,6 +88,7 @@ class _$SurahDetailCopyWithImpl<$Res, $Val extends SurahDetail>
     Object? nameTransliterationId = null,
     Object? nameTranslationId = null,
     Object? relevationId = null,
+    Object? tafsirId = null,
     Object? preBismillahTextArab = null,
     Object? preBismillahAudioPrimary = null,
     Object? versesTextArab = null,
@@ -123,6 +126,10 @@ class _$SurahDetailCopyWithImpl<$Res, $Val extends SurahDetail>
       relevationId: null == relevationId
           ? _value.relevationId
           : relevationId // ignore: cast_nullable_to_non_nullable
+              as String,
+      tafsirId: null == tafsirId
+          ? _value.tafsirId
+          : tafsirId // ignore: cast_nullable_to_non_nullable
               as String,
       preBismillahTextArab: null == preBismillahTextArab
           ? _value.preBismillahTextArab
@@ -176,6 +183,7 @@ abstract class _$$_SurahDetailCopyWith<$Res>
       String nameTransliterationId,
       String nameTranslationId,
       String relevationId,
+      String tafsirId,
       String preBismillahTextArab,
       String preBismillahAudioPrimary,
       String versesTextArab,
@@ -204,6 +212,7 @@ class __$$_SurahDetailCopyWithImpl<$Res>
     Object? nameTransliterationId = null,
     Object? nameTranslationId = null,
     Object? relevationId = null,
+    Object? tafsirId = null,
     Object? preBismillahTextArab = null,
     Object? preBismillahAudioPrimary = null,
     Object? versesTextArab = null,
@@ -241,6 +250,10 @@ class __$$_SurahDetailCopyWithImpl<$Res>
       relevationId: null == relevationId
           ? _value.relevationId
           : relevationId // ignore: cast_nullable_to_non_nullable
+              as String,
+      tafsirId: null == tafsirId
+          ? _value.tafsirId
+          : tafsirId // ignore: cast_nullable_to_non_nullable
               as String,
       preBismillahTextArab: null == preBismillahTextArab
           ? _value.preBismillahTextArab
@@ -289,6 +302,7 @@ class _$_SurahDetail extends _SurahDetail {
       required this.nameTransliterationId,
       required this.nameTranslationId,
       required this.relevationId,
+      required this.tafsirId,
       required this.preBismillahTextArab,
       required this.preBismillahAudioPrimary,
       required this.versesTextArab,
@@ -317,6 +331,8 @@ class _$_SurahDetail extends _SurahDetail {
   @override
   final String relevationId;
   @override
+  final String tafsirId;
+  @override
   final String preBismillahTextArab;
   @override
   final String preBismillahAudioPrimary;
@@ -335,7 +351,7 @@ class _$_SurahDetail extends _SurahDetail {
 
   @override
   String toString() {
-    return 'SurahDetail(number: $number, numberOfVerses: $numberOfVerses, nameShort: $nameShort, nameLong: $nameLong, nameTransliterationId: $nameTransliterationId, nameTranslationId: $nameTranslationId, relevationId: $relevationId, preBismillahTextArab: $preBismillahTextArab, preBismillahAudioPrimary: $preBismillahAudioPrimary, versesTextArab: $versesTextArab, versesNumberInQuran: $versesNumberInQuran, versesNumberInSurah: $versesNumberInSurah, versesTranslationId: $versesTranslationId, versesAudioPrimary: $versesAudioPrimary, versesTafsirIdShort: $versesTafsirIdShort)';
+    return 'SurahDetail(number: $number, numberOfVerses: $numberOfVerses, nameShort: $nameShort, nameLong: $nameLong, nameTransliterationId: $nameTransliterationId, nameTranslationId: $nameTranslationId, relevationId: $relevationId, tafsirId: $tafsirId, preBismillahTextArab: $preBismillahTextArab, preBismillahAudioPrimary: $preBismillahAudioPrimary, versesTextArab: $versesTextArab, versesNumberInQuran: $versesNumberInQuran, versesNumberInSurah: $versesNumberInSurah, versesTranslationId: $versesTranslationId, versesAudioPrimary: $versesAudioPrimary, versesTafsirIdShort: $versesTafsirIdShort)';
   }
 
   @override
@@ -356,6 +372,8 @@ class _$_SurahDetail extends _SurahDetail {
                 other.nameTranslationId == nameTranslationId) &&
             (identical(other.relevationId, relevationId) ||
                 other.relevationId == relevationId) &&
+            (identical(other.tafsirId, tafsirId) ||
+                other.tafsirId == tafsirId) &&
             (identical(other.preBismillahTextArab, preBismillahTextArab) ||
                 other.preBismillahTextArab == preBismillahTextArab) &&
             (identical(
@@ -386,6 +404,7 @@ class _$_SurahDetail extends _SurahDetail {
       nameTransliterationId,
       nameTranslationId,
       relevationId,
+      tafsirId,
       preBismillahTextArab,
       preBismillahAudioPrimary,
       versesTextArab,
@@ -418,6 +437,7 @@ abstract class _SurahDetail extends SurahDetail {
       required final String nameTransliterationId,
       required final String nameTranslationId,
       required final String relevationId,
+      required final String tafsirId,
       required final String preBismillahTextArab,
       required final String preBismillahAudioPrimary,
       required final String versesTextArab,
@@ -445,6 +465,8 @@ abstract class _SurahDetail extends SurahDetail {
   String get nameTranslationId;
   @override
   String get relevationId;
+  @override
+  String get tafsirId;
   @override
   String get preBismillahTextArab;
   @override

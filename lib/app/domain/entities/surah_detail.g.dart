@@ -62,33 +62,38 @@ const SurahDetailSchema = CollectionSchema(
       name: r'relevationId',
       type: IsarType.string,
     ),
-    r'versesAudioPrimary': PropertySchema(
+    r'tafsirId': PropertySchema(
       id: 9,
+      name: r'tafsirId',
+      type: IsarType.string,
+    ),
+    r'versesAudioPrimary': PropertySchema(
+      id: 10,
       name: r'versesAudioPrimary',
       type: IsarType.string,
     ),
     r'versesNumberInQuran': PropertySchema(
-      id: 10,
+      id: 11,
       name: r'versesNumberInQuran',
       type: IsarType.long,
     ),
     r'versesNumberInSurah': PropertySchema(
-      id: 11,
+      id: 12,
       name: r'versesNumberInSurah',
       type: IsarType.long,
     ),
     r'versesTafsirIdShort': PropertySchema(
-      id: 12,
+      id: 13,
       name: r'versesTafsirIdShort',
       type: IsarType.string,
     ),
     r'versesTextArab': PropertySchema(
-      id: 13,
+      id: 14,
       name: r'versesTextArab',
       type: IsarType.string,
     ),
     r'versesTranslationId': PropertySchema(
-      id: 14,
+      id: 15,
       name: r'versesTranslationId',
       type: IsarType.string,
     )
@@ -120,6 +125,7 @@ int _surahDetailEstimateSize(
   bytesCount += 3 + object.preBismillahAudioPrimary.length * 3;
   bytesCount += 3 + object.preBismillahTextArab.length * 3;
   bytesCount += 3 + object.relevationId.length * 3;
+  bytesCount += 3 + object.tafsirId.length * 3;
   bytesCount += 3 + object.versesAudioPrimary.length * 3;
   bytesCount += 3 + object.versesTafsirIdShort.length * 3;
   bytesCount += 3 + object.versesTextArab.length * 3;
@@ -142,12 +148,13 @@ void _surahDetailSerialize(
   writer.writeString(offsets[6], object.preBismillahAudioPrimary);
   writer.writeString(offsets[7], object.preBismillahTextArab);
   writer.writeString(offsets[8], object.relevationId);
-  writer.writeString(offsets[9], object.versesAudioPrimary);
-  writer.writeLong(offsets[10], object.versesNumberInQuran);
-  writer.writeLong(offsets[11], object.versesNumberInSurah);
-  writer.writeString(offsets[12], object.versesTafsirIdShort);
-  writer.writeString(offsets[13], object.versesTextArab);
-  writer.writeString(offsets[14], object.versesTranslationId);
+  writer.writeString(offsets[9], object.tafsirId);
+  writer.writeString(offsets[10], object.versesAudioPrimary);
+  writer.writeLong(offsets[11], object.versesNumberInQuran);
+  writer.writeLong(offsets[12], object.versesNumberInSurah);
+  writer.writeString(offsets[13], object.versesTafsirIdShort);
+  writer.writeString(offsets[14], object.versesTextArab);
+  writer.writeString(offsets[15], object.versesTranslationId);
 }
 
 SurahDetail _surahDetailDeserialize(
@@ -166,12 +173,13 @@ SurahDetail _surahDetailDeserialize(
     preBismillahAudioPrimary: reader.readString(offsets[6]),
     preBismillahTextArab: reader.readString(offsets[7]),
     relevationId: reader.readString(offsets[8]),
-    versesAudioPrimary: reader.readString(offsets[9]),
-    versesNumberInQuran: reader.readLong(offsets[10]),
-    versesNumberInSurah: reader.readLong(offsets[11]),
-    versesTafsirIdShort: reader.readString(offsets[12]),
-    versesTextArab: reader.readString(offsets[13]),
-    versesTranslationId: reader.readString(offsets[14]),
+    tafsirId: reader.readString(offsets[9]),
+    versesAudioPrimary: reader.readString(offsets[10]),
+    versesNumberInQuran: reader.readLong(offsets[11]),
+    versesNumberInSurah: reader.readLong(offsets[12]),
+    versesTafsirIdShort: reader.readString(offsets[13]),
+    versesTextArab: reader.readString(offsets[14]),
+    versesTranslationId: reader.readString(offsets[15]),
   );
   return object;
 }
@@ -204,14 +212,16 @@ P _surahDetailDeserializeProp<P>(
     case 9:
       return (reader.readString(offset)) as P;
     case 10:
-      return (reader.readLong(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 11:
       return (reader.readLong(offset)) as P;
     case 12:
-      return (reader.readString(offset)) as P;
+      return (reader.readLong(offset)) as P;
     case 13:
       return (reader.readString(offset)) as P;
     case 14:
+      return (reader.readString(offset)) as P;
+    case 15:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -1426,6 +1436,141 @@ extension SurahDetailQueryFilter
     });
   }
 
+  QueryBuilder<SurahDetail, SurahDetail, QAfterFilterCondition> tafsirIdEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'tafsirId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SurahDetail, SurahDetail, QAfterFilterCondition>
+      tafsirIdGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'tafsirId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SurahDetail, SurahDetail, QAfterFilterCondition>
+      tafsirIdLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'tafsirId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SurahDetail, SurahDetail, QAfterFilterCondition> tafsirIdBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'tafsirId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SurahDetail, SurahDetail, QAfterFilterCondition>
+      tafsirIdStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'tafsirId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SurahDetail, SurahDetail, QAfterFilterCondition>
+      tafsirIdEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'tafsirId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SurahDetail, SurahDetail, QAfterFilterCondition>
+      tafsirIdContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'tafsirId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SurahDetail, SurahDetail, QAfterFilterCondition> tafsirIdMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'tafsirId',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SurahDetail, SurahDetail, QAfterFilterCondition>
+      tafsirIdIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'tafsirId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<SurahDetail, SurahDetail, QAfterFilterCondition>
+      tafsirIdIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'tafsirId',
+        value: '',
+      ));
+    });
+  }
+
   QueryBuilder<SurahDetail, SurahDetail, QAfterFilterCondition>
       versesAudioPrimaryEqualTo(
     String value, {
@@ -2209,6 +2354,18 @@ extension SurahDetailQuerySortBy
     });
   }
 
+  QueryBuilder<SurahDetail, SurahDetail, QAfterSortBy> sortByTafsirId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'tafsirId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SurahDetail, SurahDetail, QAfterSortBy> sortByTafsirIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'tafsirId', Sort.desc);
+    });
+  }
+
   QueryBuilder<SurahDetail, SurahDetail, QAfterSortBy>
       sortByVersesAudioPrimary() {
     return QueryBuilder.apply(this, (query) {
@@ -2425,6 +2582,18 @@ extension SurahDetailQuerySortThenBy
     });
   }
 
+  QueryBuilder<SurahDetail, SurahDetail, QAfterSortBy> thenByTafsirId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'tafsirId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SurahDetail, SurahDetail, QAfterSortBy> thenByTafsirIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'tafsirId', Sort.desc);
+    });
+  }
+
   QueryBuilder<SurahDetail, SurahDetail, QAfterSortBy>
       thenByVersesAudioPrimary() {
     return QueryBuilder.apply(this, (query) {
@@ -2576,6 +2745,13 @@ extension SurahDetailQueryWhereDistinct
     });
   }
 
+  QueryBuilder<SurahDetail, SurahDetail, QDistinct> distinctByTafsirId(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'tafsirId', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<SurahDetail, SurahDetail, QDistinct>
       distinctByVersesAudioPrimary({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -2689,6 +2865,12 @@ extension SurahDetailQueryProperty
     });
   }
 
+  QueryBuilder<SurahDetail, String, QQueryOperations> tafsirIdProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'tafsirId');
+    });
+  }
+
   QueryBuilder<SurahDetail, String, QQueryOperations>
       versesAudioPrimaryProperty() {
     return QueryBuilder.apply(this, (query) {
@@ -2744,6 +2926,7 @@ _$_SurahDetail _$$_SurahDetailFromJson(Map<String, dynamic> json) =>
       nameTransliterationId: json['nameTransliterationId'] as String,
       nameTranslationId: json['nameTranslationId'] as String,
       relevationId: json['relevationId'] as String,
+      tafsirId: json['tafsirId'] as String,
       preBismillahTextArab: json['preBismillahTextArab'] as String,
       preBismillahAudioPrimary: json['preBismillahAudioPrimary'] as String,
       versesTextArab: json['versesTextArab'] as String,
@@ -2763,6 +2946,7 @@ Map<String, dynamic> _$$_SurahDetailToJson(_$_SurahDetail instance) =>
       'nameTransliterationId': instance.nameTransliterationId,
       'nameTranslationId': instance.nameTranslationId,
       'relevationId': instance.relevationId,
+      'tafsirId': instance.tafsirId,
       'preBismillahTextArab': instance.preBismillahTextArab,
       'preBismillahAudioPrimary': instance.preBismillahAudioPrimary,
       'versesTextArab': instance.versesTextArab,
