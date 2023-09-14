@@ -2,7 +2,9 @@ import 'dart:isolate';
 import 'dart:ui';
 
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
-import 'package:suji/app/data/providers/shalat_local_data_source.dart';
+import 'package:get/get.dart';
+import 'package:suji/app/data/datasources/database_helper.dart';
+import 'package:suji/app/data/datasources/shalat_local_data_source.dart';
 import 'package:suji/app/data/services/notification_service.dart';
 import 'package:suji/core/utils/date_utils.dart';
 import 'package:suji/core/utils/logger.dart';
@@ -10,7 +12,7 @@ import 'package:suji/main.dart';
 
 final ReceivePort port = ReceivePort();
 
-class BackgroundService {
+class BackgroundService extends GetxService {
   static BackgroundService? _instance;
   static const String _isolateName = 'isolate';
   static SendPort? _uiSendPort;
@@ -24,19 +26,13 @@ class BackgroundService {
     IsolateNameServer.registerPortWithName(port.sendPort, _isolateName);
   }
 
-  static alarmFired() {
-    Log.d('[BackgroundService][alarmFired]', 'ALARM FIRED!!!');
-    // print("ALARM FIRED!!!");
-  }
-
   @pragma('vm:entry-point')
   static Future<void> callback() async {
     Log.d('[BackgroundService][callback]', 'CALLBACK FIRED 2!!!');
-    // print("ALARM FIRED 2!!!");
     final notificationService = NotificationService();
     await notificationService.showNotification(flutterLocalNotificationsPlugin);
 
-    final ShalatLocalDataSourceImpl dataSource = ShalatLocalDataSourceImpl();
+    final ShalatLocalDataSource dataSource = ShalatLocalDataSourceImpl(databaseHelper: DatabaseHelper());
     final shalatTime = await dataSource.getShalatTimeByDate(DateTime.now());
     if (shalatTime != null) {
       await AndroidAlarmManager.oneShotAt(
@@ -44,6 +40,7 @@ class BackgroundService {
           0,
           BackgroundService.callback,
           exact: true,
+          rescheduleOnReboot: true,
           wakeup: true);
     }
 
