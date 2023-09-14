@@ -22,11 +22,13 @@ class DataDailyPrayResponse {
             List<dynamic>.from(dataDailyPray.map((x) => x.toJson())),
       };
 
-  List<DailyPray> toEntity() => dataDailyPray.map((e) => DailyPray(
-      title: e.title,
-      arabic: e.arabic,
-      latin: e.latin,
-      translation: e.translation)).toList();
+  List<DailyPray> toEntity() => dataDailyPray
+      .map((e) => DailyPray(
+          title: e.title,
+          arabic: e.arabic,
+          latin: e.latin,
+          translation: e.translation))
+      .toList();
 }
 
 class DataDailyPrayElement {

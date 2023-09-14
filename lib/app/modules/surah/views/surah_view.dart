@@ -37,16 +37,14 @@ class SurahView extends GetView<SurahController> {
         actions: [
           controller.obx((state) {
             return IconButton(
-                onPressed: () =>
-                    _showTafsirBottomsheet(state!.first.tafsirId),
-                icon: Icon(
-                  Icons.info_outline,
-                  size: 24.w,
-                  color: Colors.white,
-                ),
-              );
-          }, onError: (_) => const SizedBox.shrink()
-          ),
+              onPressed: () => _showTafsirBottomsheet(state!.first.tafsirId),
+              icon: Icon(
+                Icons.info_outline,
+                size: 24.w,
+                color: Colors.white,
+              ),
+            );
+          }, onError: (_) => const SizedBox.shrink()),
           // Obx(() {
           //   if (controller.status == RxStatus.success()) {
           //     return IconButton(
@@ -283,8 +281,7 @@ class SurahView extends GetView<SurahController> {
                       IconButton(
                         tooltip: 'Bagikan',
                         onPressed: () {
-                          final textAyah =
-                              '''
+                          final textAyah = '''
                               Surah : ${ayah.nameTransliterationId}
                               Ayah : ${ayah.versesNumberInSurah}
                               ${ayah.versesTextArab}

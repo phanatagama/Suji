@@ -4,7 +4,7 @@ import 'package:suji/app/domain/entities/surah.dart';
 import 'package:suji/app/domain/usescases/get_all_surah_usecase.dart';
 import 'package:suji/app/widgets/custom_snackbar.dart';
 
-class HomeController extends GetxController with StateMixin<List<Surah>>{
+class HomeController extends GetxController with StateMixin<List<Surah>> {
   final GetAllSurahUsecase getAllSurahUsecase;
   Box box = Hive.box('sujiSettingsBox');
 
@@ -23,7 +23,7 @@ class HomeController extends GetxController with StateMixin<List<Surah>>{
   String get lastRead => _lastRead.value;
 
   @override
-  void onInit() async{
+  void onInit() async {
     super.onInit();
     await getAllSurah();
     _lastRead.value = box.get('lastRead') ?? '-';
@@ -47,7 +47,7 @@ class HomeController extends GetxController with StateMixin<List<Surah>>{
   /// get all surah
   Future<void> getAllSurah() async {
     // _state.value = BaseState.loading;
-    change([], status:RxStatus.loading());
+    change([], status: RxStatus.loading());
     final result = await getAllSurahUsecase.invoke();
 
     result.fold((failure) {

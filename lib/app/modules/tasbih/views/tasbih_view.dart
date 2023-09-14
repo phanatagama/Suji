@@ -38,9 +38,10 @@ class TasbihView extends GetView<TasbihController> {
                 child: Center(
                   child: Obx(() => Text('${controller.counter}',
                       style: Get.textTheme.displayLarge?.copyWith(
-                        fontSize: 46.0,
-                        color: controller.counter >= controller.target ? Colors.red : null
-                      ))),
+                          fontSize: 46.0,
+                          color: controller.counter >= controller.target
+                              ? Colors.red
+                              : null))),
                 ),
               ),
               _buildCounterButton(),
@@ -51,7 +52,8 @@ class TasbihView extends GetView<TasbihController> {
                 fit: FlexFit.loose,
                 child: Container(
                   width: double.infinity,
-                  decoration: const BoxDecoration(color: Colors.white, boxShadow: [
+                  decoration:
+                      const BoxDecoration(color: Colors.white, boxShadow: [
                     BoxShadow(
                       blurRadius: 8.0,
                       offset: Offset(0.0, -6.0),
@@ -62,8 +64,7 @@ class TasbihView extends GetView<TasbihController> {
                     top: 16.0,
                     bottom: 16.0,
                   ),
-                  child: Text(
-                      'tasbih_description'.tr,
+                  child: Text('tasbih_description'.tr,
                       textAlign: TextAlign.center,
                       style: Get.textTheme.titleMedium),
                 ),
@@ -149,7 +150,7 @@ class TasbihView extends GetView<TasbihController> {
                         ),
                         Expanded(
                           child: InkWell(
-                          key: const Key('TargetButton33'),
+                            key: const Key('TargetButton33'),
                             onTap: () {
                               controller.target = 33;
                             },
@@ -177,7 +178,7 @@ class TasbihView extends GetView<TasbihController> {
                         ),
                         Expanded(
                           child: InkWell(
-                          key: const Key('TargetButton99'),
+                            key: const Key('TargetButton99'),
                             onTap: () {
                               controller.target = 99;
                             },
@@ -409,5 +410,4 @@ class TasbihView extends GetView<TasbihController> {
   //     ],
   //   );
   // }
-
 }

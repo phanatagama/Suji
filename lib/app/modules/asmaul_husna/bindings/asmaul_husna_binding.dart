@@ -8,6 +8,7 @@ class AsmaulHusnaBinding implements Bindings {
   void dependencies() {
     Get.lazyPut<AsmaulHusnaController>(() => AsmaulHusnaController(
         getAsmaulHusnaUsecase: Get.find<GetAsmaulHusnaUsecase>()));
-    Get.lazyPut(() => GetAsmaulHusnaUsecase(surahRepository: Get.find<SurahRepository>()));
+    Get.lazyPut(() =>
+        GetAsmaulHusnaUsecase(surahRepository: Get.find<SurahRepository>()));
   }
 }

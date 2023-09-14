@@ -28,8 +28,8 @@ class SurahController extends GetxController
   Future<void> getAyahBySurahNumber() async {
     // _state.value = BaseState.loading;
     change([], status: RxStatus.loading());
-    final result = await 
-        getAyahBySurahNumberUsecase.invoke(int.parse(Get.parameters['number']!));
+    final result = await getAyahBySurahNumberUsecase
+        .invoke(int.parse(Get.parameters['number']!));
 
     result.fold((failure) {
       // _message.value = failure.message;

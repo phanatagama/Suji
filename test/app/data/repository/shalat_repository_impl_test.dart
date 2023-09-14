@@ -96,7 +96,8 @@ void main() {
         () async {
       // arrange
       when(mockShalatLocalDataSource.getShalatTime(tDateTime, tPosition))
-          .thenAnswerInOrder([Future(() => null), Future(() => tShalatEntities)]);
+          .thenAnswerInOrder(
+              [Future(() => null), Future(() => tShalatEntities)]);
       when(mockShalatRemoteDataSource.getShalatTime(tDateTime, tPosition))
           .thenAnswer((_) async => tShalatTimeResponse);
       when(mockShalatLocalDataSource

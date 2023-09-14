@@ -46,7 +46,9 @@ void main() {
       expect(result, tShalat);
     });
 
-    test('Should return null if the obj does not exist in [DatabaseHelper] when call is successfull', () async {
+    test(
+        'Should return null if the obj does not exist in [DatabaseHelper] when call is successfull',
+        () async {
       // arrange
       when(mockDatabaseHelper.getShalatTimeByDate(tDateString))
           .thenAnswer((_) async => null);
@@ -60,7 +62,8 @@ void main() {
       expect(result, null);
     });
 
-    test('Should throw [DatabaseException] when call is unsuccessfull', () async {
+    test('Should throw [DatabaseException] when call is unsuccessfull',
+        () async {
       // arrange
       when(mockDatabaseHelper.getShalatTimeByDate(tDateString))
           .thenThrow(DatabaseException(AppString.databaseError));

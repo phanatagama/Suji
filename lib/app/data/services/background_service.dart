@@ -32,7 +32,8 @@ class BackgroundService extends GetxService {
     final notificationService = NotificationService();
     await notificationService.showNotification(flutterLocalNotificationsPlugin);
 
-    final ShalatLocalDataSource dataSource = ShalatLocalDataSourceImpl(databaseHelper: DatabaseHelper());
+    final ShalatLocalDataSource dataSource =
+        ShalatLocalDataSourceImpl(databaseHelper: DatabaseHelper());
     final shalatTime = await dataSource.getShalatTimeByDate(DateTime.now());
     if (shalatTime != null) {
       await AndroidAlarmManager.oneShotAt(

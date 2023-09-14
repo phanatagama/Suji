@@ -12,22 +12,24 @@ import 'package:suji/core/values/constant.dart';
 import '../../../helper/test_helper.mocks.dart';
 import '../../../json_reader.dart';
 
-void main(){
+void main() {
   late SurahRepository mockSurahRepository;
   late GetAllSurahUsecase getAllSurahUsecase;
 
   setUp(() {
     mockSurahRepository = MockSurahRepository();
-    getAllSurahUsecase = GetAllSurahUsecase(surahRepository: mockSurahRepository);
+    getAllSurahUsecase =
+        GetAllSurahUsecase(surahRepository: mockSurahRepository);
   });
 
   group('Get All Surah Test', () {
     final ListSurah tSurahResponse =
         ListSurah.fromJson(json.decode(readJson('list_surah_response.json')));
     final tSurahEntities = tSurahResponse.toEntity();
-    test('Should return all surah when call is successful', () async{
+    test('Should return all surah when call is successful', () async {
       // arrange
-      when(mockSurahRepository.getAllSurah()).thenAnswer((_) async => right(tSurahEntities));
+      when(mockSurahRepository.getAllSurah())
+          .thenAnswer((_) async => right(tSurahEntities));
 
       //act
       final result = await getAllSurahUsecase.invoke();
@@ -37,9 +39,11 @@ void main(){
 
       expect(result, equals(right(tSurahEntities)));
     });
-    test('Should return [DatabaseFailure] when call from local is unsuccessful', () async{
+    test('Should return [DatabaseFailure] when call from local is unsuccessful',
+        () async {
       // arrange
-      when(mockSurahRepository.getAllSurah()).thenAnswer((_) async => left(const DatabaseFailure(AppString.databaseError)));
+      when(mockSurahRepository.getAllSurah()).thenAnswer(
+          (_) async => left(const DatabaseFailure(AppString.databaseError)));
 
       //act
       final result = await getAllSurahUsecase.invoke();
@@ -47,11 +51,14 @@ void main(){
       // assert
       verify(mockSurahRepository.getAllSurah());
 
-      expect(result, equals(left(const DatabaseFailure(AppString.databaseError))));
+      expect(
+          result, equals(left(const DatabaseFailure(AppString.databaseError))));
     });
-    test('Should return [ServerFailure] when call from remote is unsuccessful', () async{
+    test('Should return [ServerFailure] when call from remote is unsuccessful',
+        () async {
       // arrange
-      when(mockSurahRepository.getAllSurah()).thenAnswer((_) async => left(const ServerFailure(AppString.socketException)));
+      when(mockSurahRepository.getAllSurah()).thenAnswer(
+          (_) async => left(const ServerFailure(AppString.socketException)));
 
       //act
       final result = await getAllSurahUsecase.invoke();
@@ -59,11 +66,15 @@ void main(){
       // assert
       verify(mockSurahRepository.getAllSurah());
 
-      expect(result, equals(left(const ServerFailure(AppString.socketException))));
+      expect(
+          result, equals(left(const ServerFailure(AppString.socketException))));
     });
-    test('Should return [ConnectionFailure] when device not connected to internet', () async{
+    test(
+        'Should return [ConnectionFailure] when device not connected to internet',
+        () async {
       // arrange
-      when(mockSurahRepository.getAllSurah()).thenAnswer((_) async => left(const ConnectionFailure(AppString.socketException)));
+      when(mockSurahRepository.getAllSurah()).thenAnswer((_) async =>
+          left(const ConnectionFailure(AppString.socketException)));
 
       //act
       final result = await getAllSurahUsecase.invoke();
@@ -71,7 +82,8 @@ void main(){
       // assert
       verify(mockSurahRepository.getAllSurah());
 
-      expect(result, equals(left(const ConnectionFailure(AppString.socketException))));
+      expect(result,
+          equals(left(const ConnectionFailure(AppString.socketException))));
     });
-   });
+  });
 }

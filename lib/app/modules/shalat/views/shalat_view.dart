@@ -169,18 +169,15 @@ class ShalatView extends GetView<ShalatController> {
                             size: 16.0,
                           ),
                         ),
-                        controller.obx(
-                          (state) {
-                            return Text(
-                              state?.dateReadable ?? '-',
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                  fontSize: 24.0, fontWeight: FontWeight.bold),
-                            );
-                          },
-                          onError: (_) => const SizedBox.shrink()
-                        ),
+                        controller.obx((state) {
+                          return Text(
+                            state?.dateReadable ?? '-',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                                fontSize: 24.0, fontWeight: FontWeight.bold),
+                          );
+                        }, onError: (_) => const SizedBox.shrink()),
                         IconButton(
                           onPressed: () async => controller.nextDay(),
                           icon: const Icon(

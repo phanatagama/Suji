@@ -171,19 +171,44 @@ class AsmaulHusnaView extends GetView<AsmaulHusnaController> {
   }
 
   Widget _buildAsmaulHusnaError(errorMessage) {
-          return Center(
-            child: IconButton(
-              onPressed: () async => await controller.getAsmaulHusna(),
-              icon: const Icon(
-                Icons.replay,
-                size: 24.0,
-              ),
-            ),
-          );
-        }
+    return Center(
+      child: IconButton(
+        onPressed: () async => await controller.getAsmaulHusna(),
+        icon: const Icon(
+          Icons.replay,
+          size: 24.0,
+        ),
+      ),
+    );
+  }
 
   GridView _buildAsmaulHusnaLoading() {
     return GridView.builder(
+      padding: EdgeInsets.zero,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        childAspectRatio: 1.0,
+        crossAxisCount: 3,
+        mainAxisSpacing: 6,
+        crossAxisSpacing: 6,
+      ),
+      itemCount: 9,
+      shrinkWrap: true,
+      physics: const ScrollPhysics(),
+      itemBuilder: (BuildContext context, int index) {
+        return const BoxPlaceholder(
+          width: 64,
+          height: 64,
+        );
+      },
+    );
+  }
+
+  Widget _buildAsmaulHusnaSuccess(state) {
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: GridView.builder(
           padding: EdgeInsets.zero,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             childAspectRatio: 1.0,
@@ -191,107 +216,82 @@ class AsmaulHusnaView extends GetView<AsmaulHusnaController> {
             mainAxisSpacing: 6,
             crossAxisSpacing: 6,
           ),
-          itemCount: 9,
+          itemCount: state?.length,
           shrinkWrap: true,
           physics: const ScrollPhysics(),
           itemBuilder: (BuildContext context, int index) {
-            return const BoxPlaceholder(
-              width: 64,
-              height: 64,
-            );
-          },
-        );
-  }
-
-  Widget _buildAsmaulHusnaSuccess(state) {
-          return Directionality(
-            textDirection: TextDirection.rtl,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: GridView.builder(
-                padding: EdgeInsets.zero,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  childAspectRatio: 1.0,
-                  crossAxisCount: 3,
-                  mainAxisSpacing: 6,
-                  crossAxisSpacing: 6,
-                ),
-                itemCount: state?.length,
-                shrinkWrap: true,
-                physics: const ScrollPhysics(),
-                itemBuilder: (BuildContext context, int index) {
-                  final asmaulHusna = state![index];
-                  return Stack(
+            final asmaulHusna = state![index];
+            return Stack(
+              children: [
+                Container(
+                  width: double.infinity,
+                  clipBehavior: Clip.hardEdge,
+                  decoration: BoxDecoration(
+                      color: AppColors.primary,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: const [
+                        BoxShadow(
+                            blurRadius: 4.0,
+                            color: Colors.black,
+                            offset: Offset(0.0, 0.5))
+                      ]),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        width: double.infinity,
-                        clipBehavior: Clip.hardEdge,
-                        decoration: BoxDecoration(
-                            color: AppColors.primary,
-                            borderRadius: BorderRadius.circular(12),
-                            boxShadow: const [
-                              BoxShadow(
-                                  blurRadius: 4.0,
-                                  color: Colors.black,
-                                  offset: Offset(0.0, 0.5))
-                            ]),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              flex: 3,
-                              child: Container(
-                                color: Colors.grey[100],
-                                alignment: Alignment.bottomCenter,
-                                child: AutoSizeText(
-                                  asmaulHusna.arabic,
-                                  maxLines: 2,
-                                  textAlign: TextAlign.center,
-                                  style: Get.textTheme.displayLarge?.copyWith(
-                                    color: AppColors.primary,
-                                  ),
-                                ),
-                              ),
+                      Expanded(
+                        flex: 3,
+                        child: Container(
+                          color: Colors.grey[100],
+                          alignment: Alignment.bottomCenter,
+                          child: AutoSizeText(
+                            asmaulHusna.arabic,
+                            maxLines: 2,
+                            textAlign: TextAlign.center,
+                            style: Get.textTheme.displayLarge?.copyWith(
+                              color: AppColors.primary,
                             ),
-                            Expanded(
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: AutoSizeText(asmaulHusna.latin,
-                                    maxLines: 2,
-                                    textAlign: TextAlign.center,
-                                    style: Get.textTheme.bodyMedium?.copyWith(
-                                      color: Colors.white,
-                                    )),
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
                       ),
-                      Container(
-                        padding: const EdgeInsets.all(8.0),
-                        decoration: const BoxDecoration(
-                          color: AppColors.primary,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(
-                              8.0,
-                            ),
-                          ),
-                        ),
-                        child: Text(
-                          asmaulHusna.index,
-                          style: const TextStyle(
-                            fontSize: 16.0,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: AutoSizeText(asmaulHusna.latin,
+                              maxLines: 2,
+                              textAlign: TextAlign.center,
+                              style: Get.textTheme.bodyMedium?.copyWith(
+                                color: Colors.white,
+                              )),
                         ),
                       ),
                     ],
-                  );
-                },
-              ),
-            ),
-          );
-        }
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8.0),
+                  decoration: const BoxDecoration(
+                    color: AppColors.primary,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(
+                        8.0,
+                      ),
+                    ),
+                  ),
+                  child: Text(
+                    asmaulHusna.index,
+                    style: const TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
+      ),
+    );
+  }
 }

@@ -7,7 +7,7 @@ import 'package:suji/core/utils/failure.dart';
 class GetShalatTimeUsecase {
   final ShalatRepository shalatRepository;
   GetShalatTimeUsecase({required this.shalatRepository});
-  
+
   Future<Either<Failure, Shalat>> invoke(DateTime dateTime, Position position) {
     return shalatRepository.getShalatTime(dateTime, position);
   }

@@ -1,326 +1,226 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:suji/core/theme/colors.dart';
 
 class Lab extends StatelessWidget {
   const Lab({super.key});
+  // double heroItemHeight = 100;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      // backgroundColor: scaffoldColor,
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        title: const Text(
+          'Tasbih Digital',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 16.0,
+          ),
+        ),
+        leading: const Icon(
+          Icons.arrow_back_ios,
+          color: AppColors.background,
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                width: Get.width,
-                decoration: const BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(
-                      8.0,
-                    ),
-                  ),
+                padding: const EdgeInsets.all(8.0),
+                // color: Colors.green,
+                child: Center(
+                  child: Text('1',
+                      style: Get.textTheme.displayLarge?.copyWith(
+                        fontSize: 46.0,
+                      )),
                 ),
-                child: Stack(children: [
-                  SizedBox(
-                    width: Get.width,
-                    child: Image.asset('assets/images/salah_banner.png',
-                        fit: BoxFit.cover),
+              ),
+              SizedBox(
+                height: 275.0,
+                // color: Colors.blue,
+                child: Stack(
+                    fit: StackFit.expand,
+                    alignment: Alignment.center,
+                    children: [
+                      Positioned(
+                        left: 0,
+                        right: 0,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          style: ButtonStyle(
+                              shadowColor:
+                                  MaterialStateProperty.all(Colors.black),
+                              shape: MaterialStateProperty.all(
+                                  const CircleBorder(
+                                      side: BorderSide(
+                                          color: AppColors.onPrimary,
+                                          width: 2.0)))),
+                          child: const Icon(
+                            Icons.keyboard_arrow_up,
+                            size: 200.0,
+                            color: AppColors.background,
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 0,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          style: ButtonStyle(
+                              shape: MaterialStateProperty.all(
+                                  const CircleBorder(
+                                      side: BorderSide(
+                                          color: AppColors.background,
+                                          width: 2.0)))),
+                          child: const Icon(
+                            Icons.keyboard_arrow_down,
+                            color: AppColors.background,
+                            size: 25.0,
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: 0,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          style: ButtonStyle(
+                              shape: MaterialStateProperty.all(
+                                  const CircleBorder(
+                                      side: BorderSide(
+                                          color: AppColors.background,
+                                          width: 2.0)))),
+                          child: const Icon(
+                            Icons.restart_alt,
+                            color: AppColors.background,
+                            size: 25.0,
+                          ),
+                        ),
+                      ),
+                    ]),
+              ),
+              Flexible(
+                fit: FlexFit.loose,
+                child: Container(
+                  margin: const EdgeInsets.only(
+                    top: 16.0,
+                    bottom: 16.0,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          decoration: const ShapeDecoration(
-                              color: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(12.0),
-                                ),
-                              )),
-                          child: IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.arrow_back,
-                                size: 24.0,
-                                // color: scaffoldColor,
-                              )),
-                        ),
-                        const SizedBox(
-                          height: 8.0,
-                        ),
-                        const Text(
-                          'Jadwal Sholat',
-                          style: TextStyle(
-                              fontSize: 16.0,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        const Text(
-                          'Surabaya',
-                          style: TextStyle(
-                              fontSize: 16.0,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(
-                          height: 72.0,
-                        ),
-                        const Center(
-                          child: Text(
-                            'Shubuh 4:17 AM',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: 24.0,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        const Text(
-                          'Yang membedakan antara orang beriman dengan tidak beriman adalah meninggalkan salat.',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 12.0,
-                            fontStyle: FontStyle.italic,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
+                  child: Text(
+                      'Tasbih digital untuk membantu anda berdzikir setiap hari',
+                      textAlign: TextAlign.center,
+                      style: Get.textTheme.titleMedium),
+                ),
+              ),
+              Flexible(
+                fit: FlexFit.loose,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      // color: Colors.red,
+                      margin: const EdgeInsets.only(
+                        left: 16.0,
+                      ),
+                      child: Text('Target',
+                          textAlign: TextAlign.start,
+                          style: Get.textTheme.titleLarge),
                     ),
-                  ),
-                  Positioned.fill(
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                          width: Get.width * .8,
-                          height: 64.0,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(100.0),
-                          ),
-                          child: const Center(
-                            child: Text(
-                              '30 September 2023',
-                              style: TextStyle(
-                                  fontSize: 24.0, fontWeight: FontWeight.bold),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 8),
+                      // color: Colors.orange,
+                      child: TextFormField(
+                        initialValue: '11',
+                        keyboardType:
+                            const TextInputType.numberWithOptions(signed: true),
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12.0),
+                            borderSide: const BorderSide(
+                              color: Colors.black12,
                             ),
-                          )),
-                    ),
-                  ),
-                  Positioned(
-                    top: 8.0,
-                    right: 8.0,
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.notifications,
-                        size: 48.0,
-                        color: Colors.white,
+                          ),
+                          // helperText: 'Masukkan targetmu',
+                        ),
+                        onChanged: (value) {},
                       ),
                     ),
-                  )
-                ]),
+                  ],
+                ),
               ),
-              const SizedBox(
-                height: 8.0,
+              Flexible(
+                fit: FlexFit.loose,
+                child: Container(
+                  // height: 100.0,
+                  padding: const EdgeInsets.all(8.0),
+                  // color: Colors.red,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          padding: const EdgeInsets.all(16.0),
+                          margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                          decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          child: const Text(
+                            '11',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 16.0,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          padding: const EdgeInsets.all(16.0),
+                          margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                          decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          child: const Text(
+                            '33',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 16.0,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          padding: const EdgeInsets.all(16.0),
+                          margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                          decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          child: const Text(
+                            '99',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 16.0,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 16.0, horizontal: 32.0),
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 2.0),
-                    decoration: ShapeDecoration(
-                        color: Colors.transparent,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16.0),
-                        )),
-                    child: const Row(
-                      children: [
-                        ImageIcon(
-                          AssetImage(
-                            'assets/images/Shalat-Shubuh.png',
-                          ),
-                          size: 24.0,
-                          color: Colors.white,
-                        ),
-                        Spacer(),
-                        Text(
-                          'Shubuh',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Spacer(),
-                        Text(
-                          '04:48',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 16.0, horizontal: 32.0),
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 2.0),
-                    decoration: ShapeDecoration(
-                        color: Colors.transparent,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16.0),
-                        )),
-                    child: const Row(
-                      children: [
-                        ImageIcon(
-                          AssetImage(
-                            'assets/images/Shalat-Zhuhur.png',
-                          ),
-                          size: 24.0,
-                          color: Colors.white,
-                        ),
-                        Spacer(),
-                        Text(
-                          'Dzuhur',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Spacer(),
-                        Text(
-                          '04:48',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 16.0, horizontal: 32.0),
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 2.0),
-                    decoration: ShapeDecoration(
-                        color: Colors.transparent,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16.0),
-                        )),
-                    child: const Row(
-                      children: [
-                        ImageIcon(
-                          AssetImage(
-                            'assets/images/Shalat-Ashar.png',
-                          ),
-                          size: 24.0,
-                          color: Colors.white,
-                        ),
-                        Spacer(),
-                        Text(
-                          'Ashar',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Spacer(),
-                        Text(
-                          '04:48',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 16.0, horizontal: 32.0),
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 2.0),
-                    decoration: ShapeDecoration(
-                        color: Colors.transparent,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16.0),
-                        )),
-                    child: const Row(
-                      children: [
-                        ImageIcon(
-                          AssetImage(
-                            'assets/images/Shalat-Maghrib.png',
-                          ),
-                          size: 24.0,
-                          color: Colors.white,
-                        ),
-                        Spacer(),
-                        Text(
-                          'Maghrib',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Spacer(),
-                        Text(
-                          '04:48',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 16.0, horizontal: 32.0),
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 2.0),
-                    decoration: ShapeDecoration(
-                        color: Colors.transparent,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16.0),
-                        )),
-                    child: const Row(
-                      children: [
-                        ImageIcon(
-                          AssetImage(
-                            'assets/images/Shalat-Isya.png',
-                          ),
-                          size: 24.0,
-                          color: Colors.white,
-                        ),
-                        Spacer(),
-                        Text(
-                          'Isya',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Spacer(),
-                        Text(
-                          '04:48',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+              Flexible(
+                fit: FlexFit.loose,
+                child: Container(
+                  height: 100.0,
+                  color: Colors.green,
+                ),
               ),
             ],
           ),
@@ -328,4 +228,131 @@ class Lab extends StatelessWidget {
       ),
     );
   }
+
+  // Stack _buildHeroItem() {
+  //   return Stack(
+  //     // fit: StackFit.expand,
+  //     children: [
+  //       Container(
+  //         height: Get.height * 0.2,
+  //         decoration: const BoxDecoration(
+  //           color: Colors.orange,
+  //         ),
+  //       ),
+  //       Transform.translate(
+  //         offset: const Offset(0.0, 100),
+  //         child: Center(
+  //           child: Container(
+  //             width: Get.width * 0.8,
+  //             padding: const EdgeInsets.all(8.0),
+  //             decoration: const BoxDecoration(
+  //               color: Colors.white,
+  //               boxShadow: [
+  //                 BoxShadow(
+  //                     color: Colors.black12,
+  //                     blurRadius: 16.0,
+  //                     offset: Offset(.0, 6.0))
+  //               ],
+  //               borderRadius: BorderRadius.all(
+  //                 Radius.circular(
+  //                   8.0,
+  //                 ),
+  //               ),
+  //             ),
+  //             child: SingleChildScrollView(
+  //               scrollDirection: Axis.horizontal,
+  //               controller: ScrollController(),
+  //               child: Row(
+  //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                 mainAxisSize: MainAxisSize.min,
+  //                 children: [
+  //                   Container(
+  //                     width: 100,
+  //                     color: Colors.green,
+  //                     child: const Column(
+  //                       mainAxisAlignment: MainAxisAlignment.center,
+  //                       children: [
+  //                         Icon(
+  //                           Icons.photo_camera_outlined,
+  //                           size: 20.0,
+  //                           color: Colors.red,
+  //                         ),
+  //                         Text(
+  //                           'Jadwal Shalat',
+  //                           maxLines: 2,
+  //                           overflow: TextOverflow.ellipsis,
+  //                           textAlign: TextAlign.center,
+  //                         ),
+  //                       ],
+  //                     ),
+  //                   ),
+  //                   Container(
+  //                     width: 100,
+  //                     color: Colors.green,
+  //                     child: const Column(
+  //                       mainAxisAlignment: MainAxisAlignment.center,
+  //                       children: [
+  //                         Icon(
+  //                           Icons.photo_camera_outlined,
+  //                           size: 20.0,
+  //                           color: Colors.red,
+  //                         ),
+  //                         Text(
+  //                           'Jadwal Shalat',
+  //                           maxLines: 2,
+  //                           overflow: TextOverflow.ellipsis,
+  //                           textAlign: TextAlign.center,
+  //                         ),
+  //                       ],
+  //                     ),
+  //                   ),
+  //                   Container(
+  //                     width: 100,
+  //                     color: Colors.green,
+  //                     child: const Column(
+  //                       mainAxisAlignment: MainAxisAlignment.center,
+  //                       children: [
+  //                         Icon(
+  //                           Icons.photo_camera_outlined,
+  //                           size: 20.0,
+  //                           color: Colors.red,
+  //                         ),
+  //                         Text(
+  //                           'Jadwal Shalat',
+  //                           maxLines: 2,
+  //                           overflow: TextOverflow.ellipsis,
+  //                           textAlign: TextAlign.center,
+  //                         ),
+  //                       ],
+  //                     ),
+  //                   ),
+  //                   Container(
+  //                     width: 100,
+  //                     color: Colors.green,
+  //                     child: const Column(
+  //                       mainAxisAlignment: MainAxisAlignment.center,
+  //                       children: [
+  //                         Icon(
+  //                           Icons.photo_camera_outlined,
+  //                           size: 20.0,
+  //                           color: Colors.red,
+  //                         ),
+  //                         Text(
+  //                           'Jadwal Shalat',
+  //                           maxLines: 2,
+  //                           overflow: TextOverflow.ellipsis,
+  //                           textAlign: TextAlign.center,
+  //                         ),
+  //                       ],
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //             ),
+  //           ),
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
 }

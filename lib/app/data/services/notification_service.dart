@@ -37,7 +37,7 @@ class NotificationService {
     vibrationPattern[1] = 1000;
     vibrationPattern[2] = 5000;
     vibrationPattern[3] = 2000;
-    final androidPlatformChannelSpecifics =  AndroidNotificationDetails(
+    final androidPlatformChannelSpecifics = AndroidNotificationDetails(
         _channelId, _channelName,
         channelDescription: _channelDesc,
         importance: Importance.max,

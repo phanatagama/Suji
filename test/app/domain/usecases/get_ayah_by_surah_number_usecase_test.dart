@@ -12,23 +12,26 @@ import 'package:suji/core/values/constant.dart';
 import '../../../helper/test_helper.mocks.dart';
 import '../../../json_reader.dart';
 
-void main(){
+void main() {
   late SurahRepository mockSurahRepository;
   late GetAyahBySurahNumberUsecase getAyahBySurahNumberUsecase;
 
   setUp(() {
     mockSurahRepository = MockSurahRepository();
-    getAyahBySurahNumberUsecase = GetAyahBySurahNumberUsecase(surahRepository: mockSurahRepository);
+    getAyahBySurahNumberUsecase =
+        GetAyahBySurahNumberUsecase(surahRepository: mockSurahRepository);
   });
 
   group('Get Ayah by SurahNumber Test', () {
     final SurahDetailResponse tSurahDetailResponse =
-        SurahDetailResponse.fromJson(json.decode(readJson('surah_detail_response.json')));
+        SurahDetailResponse.fromJson(
+            json.decode(readJson('surah_detail_response.json')));
     final tSurahDetailEntities = tSurahDetailResponse.toEntity();
     final surahNumber = tSurahDetailEntities.first.number;
-    test('Should return all ayah when call is successful', () async{
+    test('Should return all ayah when call is successful', () async {
       // arrange
-      when(mockSurahRepository.getAyahBySurahNumber(surahNumber)).thenAnswer((_) async => right(tSurahDetailEntities));
+      when(mockSurahRepository.getAyahBySurahNumber(surahNumber))
+          .thenAnswer((_) async => right(tSurahDetailEntities));
 
       //act
       final result = await getAyahBySurahNumberUsecase.invoke(surahNumber);
@@ -38,9 +41,11 @@ void main(){
 
       expect(result, equals(right(tSurahDetailEntities)));
     });
-    test('Should return [DatabaseFailure] when call from local is unsuccessful', () async{
+    test('Should return [DatabaseFailure] when call from local is unsuccessful',
+        () async {
       // arrange
-      when(mockSurahRepository.getAyahBySurahNumber(surahNumber)).thenAnswer((_) async => left(const DatabaseFailure(AppString.databaseError)));
+      when(mockSurahRepository.getAyahBySurahNumber(surahNumber)).thenAnswer(
+          (_) async => left(const DatabaseFailure(AppString.databaseError)));
 
       //act
       final result = await getAyahBySurahNumberUsecase.invoke(surahNumber);
@@ -48,11 +53,14 @@ void main(){
       // assert
       verify(mockSurahRepository.getAyahBySurahNumber(surahNumber));
 
-      expect(result, equals(left(const DatabaseFailure(AppString.databaseError))));
+      expect(
+          result, equals(left(const DatabaseFailure(AppString.databaseError))));
     });
-    test('Should return [ServerFailure] when call from remote is unsuccessful', () async{
+    test('Should return [ServerFailure] when call from remote is unsuccessful',
+        () async {
       // arrange
-      when(mockSurahRepository.getAyahBySurahNumber(surahNumber)).thenAnswer((_) async => left(const ServerFailure(AppString.databaseError)));
+      when(mockSurahRepository.getAyahBySurahNumber(surahNumber)).thenAnswer(
+          (_) async => left(const ServerFailure(AppString.databaseError)));
 
       //act
       final result = await getAyahBySurahNumberUsecase.invoke(surahNumber);
@@ -60,11 +68,15 @@ void main(){
       // assert
       verify(mockSurahRepository.getAyahBySurahNumber(surahNumber));
 
-      expect(result, equals(left(const ServerFailure(AppString.databaseError))));
+      expect(
+          result, equals(left(const ServerFailure(AppString.databaseError))));
     });
-    test('Should return [ConnectionFailure] when call from remote is unsuccessful', () async{
+    test(
+        'Should return [ConnectionFailure] when call from remote is unsuccessful',
+        () async {
       // arrange
-      when(mockSurahRepository.getAyahBySurahNumber(surahNumber)).thenAnswer((_) async => left(const ConnectionFailure(AppString.databaseError)));
+      when(mockSurahRepository.getAyahBySurahNumber(surahNumber)).thenAnswer(
+          (_) async => left(const ConnectionFailure(AppString.databaseError)));
 
       //act
       final result = await getAyahBySurahNumberUsecase.invoke(surahNumber);
@@ -72,7 +84,8 @@ void main(){
       // assert
       verify(mockSurahRepository.getAyahBySurahNumber(surahNumber));
 
-      expect(result, equals(left(const ConnectionFailure(AppString.databaseError))));
+      expect(result,
+          equals(left(const ConnectionFailure(AppString.databaseError))));
     });
-   });
+  });
 }

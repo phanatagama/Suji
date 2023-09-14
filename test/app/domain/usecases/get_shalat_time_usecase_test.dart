@@ -14,13 +14,14 @@ import 'package:suji/core/values/constant.dart';
 import '../../../helper/test_helper.mocks.dart';
 import '../../../json_reader.dart';
 
-void main(){
+void main() {
   late ShalatRepository mockShalatRepository;
   late GetShalatTimeUsecase getShalatTimeUsecase;
 
   setUp(() {
     mockShalatRepository = MockShalatRepository();
-    getShalatTimeUsecase = GetShalatTimeUsecase(shalatRepository: mockShalatRepository);
+    getShalatTimeUsecase =
+        GetShalatTimeUsecase(shalatRepository: mockShalatRepository);
   });
 
   group('Get Shalat Time Test', () {
@@ -38,53 +39,65 @@ void main(){
         ShalatTimeResponse.fromJson(json.decode(readJson('shalah_time.json')));
     final Shalat tShalatEntities = tShalatTimeResponse.toEntity().first;
 
-    test('Should return data shalat when call is successful', () async{
+    test('Should return data shalat when call is successful', () async {
       // arrange
-      when(mockShalatRepository.getShalatTime(tDateTime,tPosition)).thenAnswer((_) async => right(tShalatEntities));
+      when(mockShalatRepository.getShalatTime(tDateTime, tPosition))
+          .thenAnswer((_) async => right(tShalatEntities));
 
       //act
-      final result = await getShalatTimeUsecase.invoke(tDateTime,tPosition);
+      final result = await getShalatTimeUsecase.invoke(tDateTime, tPosition);
 
       // assert
-      verify(mockShalatRepository.getShalatTime(tDateTime,tPosition));
+      verify(mockShalatRepository.getShalatTime(tDateTime, tPosition));
 
       expect(result, equals(right(tShalatEntities)));
     });
-    test('Should return [DatabaseFailure] when call from local is unsuccessful', () async{
+    test('Should return [DatabaseFailure] when call from local is unsuccessful',
+        () async {
       // arrange
-      when(mockShalatRepository.getShalatTime(tDateTime,tPosition)).thenAnswer((_) async => left(const DatabaseFailure(AppString.databaseError)));
+      when(mockShalatRepository.getShalatTime(tDateTime, tPosition)).thenAnswer(
+          (_) async => left(const DatabaseFailure(AppString.databaseError)));
 
       //act
-      final result = await getShalatTimeUsecase.invoke(tDateTime,tPosition);
+      final result = await getShalatTimeUsecase.invoke(tDateTime, tPosition);
 
       // assert
-      verify(mockShalatRepository.getShalatTime(tDateTime,tPosition));
+      verify(mockShalatRepository.getShalatTime(tDateTime, tPosition));
 
-      expect(result, equals(left(const DatabaseFailure(AppString.databaseError))));
+      expect(
+          result, equals(left(const DatabaseFailure(AppString.databaseError))));
     });
-    test('Should return [ServerFailure] when call from remote is unsuccessful', () async{
+    test('Should return [ServerFailure] when call from remote is unsuccessful',
+        () async {
       // arrange
-      when(mockShalatRepository.getShalatTime(tDateTime,tPosition)).thenAnswer((_) async => left(const ServerFailure(AppString.socketException)));
+      when(mockShalatRepository.getShalatTime(tDateTime, tPosition)).thenAnswer(
+          (_) async => left(const ServerFailure(AppString.socketException)));
 
       //act
-      final result = await getShalatTimeUsecase.invoke(tDateTime,tPosition);
+      final result = await getShalatTimeUsecase.invoke(tDateTime, tPosition);
 
       // assert
-      verify(mockShalatRepository.getShalatTime(tDateTime,tPosition));
+      verify(mockShalatRepository.getShalatTime(tDateTime, tPosition));
 
-      expect(result, equals(left(const ServerFailure(AppString.socketException))));
+      expect(
+          result, equals(left(const ServerFailure(AppString.socketException))));
     });
-    test('Should return [ConnectionFailure] when device not connected to internet', () async{
+    test(
+        'Should return [ConnectionFailure] when device not connected to internet',
+        () async {
       // arrange
-      when(mockShalatRepository.getShalatTime(tDateTime,tPosition)).thenAnswer((_) async => left(const ConnectionFailure(AppString.socketException)));
+      when(mockShalatRepository.getShalatTime(tDateTime, tPosition)).thenAnswer(
+          (_) async =>
+              left(const ConnectionFailure(AppString.socketException)));
 
       //act
-      final result = await getShalatTimeUsecase.invoke(tDateTime,tPosition);
+      final result = await getShalatTimeUsecase.invoke(tDateTime, tPosition);
 
       // assert
-      verify(mockShalatRepository.getShalatTime(tDateTime,tPosition));
+      verify(mockShalatRepository.getShalatTime(tDateTime, tPosition));
 
-      expect(result, equals(left(const ConnectionFailure(AppString.socketException))));
+      expect(result,
+          equals(left(const ConnectionFailure(AppString.socketException))));
     });
-   });
+  });
 }

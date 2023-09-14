@@ -30,7 +30,7 @@ class SurahRemoteDataSourceImpl extends GetConnect
         return errorHandler(response);
       }
     } catch (e) {
-        Log.e('[SurahRemoteDataSource][getAllSurah]', e.toString());
+      Log.e('[SurahRemoteDataSource][getAllSurah]', e.toString());
       throw ServerException(e.toString());
     }
   }

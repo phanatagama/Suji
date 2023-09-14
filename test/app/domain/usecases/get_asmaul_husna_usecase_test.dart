@@ -12,22 +12,24 @@ import 'package:suji/core/values/constant.dart';
 import '../../../helper/test_helper.mocks.dart';
 import '../../../json_reader.dart';
 
-void main(){
+void main() {
   late SurahRepository mockSurahRepository;
   late GetAsmaulHusnaUsecase getAsmaulHusnaUsecase;
 
   setUp(() {
     mockSurahRepository = MockSurahRepository();
-    getAsmaulHusnaUsecase = GetAsmaulHusnaUsecase(surahRepository: mockSurahRepository);
+    getAsmaulHusnaUsecase =
+        GetAsmaulHusnaUsecase(surahRepository: mockSurahRepository);
   });
 
   group('Get Asmaul Husna Test', () {
-     final tAsmaulHusnaResponse = AsmaulHusnaResponse.fromJson(
+    final tAsmaulHusnaResponse = AsmaulHusnaResponse.fromJson(
         json.decode(readJson('asmaul_husna.json')));
     final tAsmaulHusnaEntities = tAsmaulHusnaResponse.toEntity();
-    test('Should return all surah when call is successful', () async{
+    test('Should return all surah when call is successful', () async {
       // arrange
-      when(mockSurahRepository.getAsmaulHusna()).thenAnswer((_) async => right(tAsmaulHusnaEntities));
+      when(mockSurahRepository.getAsmaulHusna())
+          .thenAnswer((_) async => right(tAsmaulHusnaEntities));
 
       //act
       final result = await getAsmaulHusnaUsecase.invoke();
@@ -37,9 +39,11 @@ void main(){
 
       expect(result, equals(right(tAsmaulHusnaEntities)));
     });
-    test('Should return [DatabaseFailure] when call from local is unsuccessful', () async{
+    test('Should return [DatabaseFailure] when call from local is unsuccessful',
+        () async {
       // arrange
-      when(mockSurahRepository.getAsmaulHusna()).thenAnswer((_) async => left(const DatabaseFailure(AppString.databaseError)));
+      when(mockSurahRepository.getAsmaulHusna()).thenAnswer(
+          (_) async => left(const DatabaseFailure(AppString.databaseError)));
 
       //act
       final result = await getAsmaulHusnaUsecase.invoke();
@@ -47,7 +51,8 @@ void main(){
       // assert
       verify(mockSurahRepository.getAsmaulHusna());
 
-      expect(result, equals(left(const DatabaseFailure(AppString.databaseError))));
+      expect(
+          result, equals(left(const DatabaseFailure(AppString.databaseError))));
     });
-   });
+  });
 }

@@ -10,9 +10,11 @@ class SurahBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<SurahController>(
-      () => SurahController(getAyahBySurahNumberUsecase: Get.find<GetAyahBySurahNumberUsecase>()),
+      () => SurahController(
+          getAyahBySurahNumberUsecase: Get.find<GetAyahBySurahNumberUsecase>()),
     );
-    Get.lazyPut(() => GetAyahBySurahNumberUsecase(surahRepository: Get.find<SurahRepository>()));
+    Get.lazyPut(() => GetAyahBySurahNumberUsecase(
+        surahRepository: Get.find<SurahRepository>()));
     Get.lazyPut<AudioController>(
       () => AudioController(connectivity: Get.find<Connectivity>()),
     );

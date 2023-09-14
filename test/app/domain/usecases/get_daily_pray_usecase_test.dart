@@ -12,22 +12,24 @@ import 'package:suji/core/values/constant.dart';
 import '../../../helper/test_helper.mocks.dart';
 import '../../../json_reader.dart';
 
-void main(){
+void main() {
   late SurahRepository mockSurahRepository;
   late GetDailyPrayUsecase getDailyPrayUsecase;
 
   setUp(() {
     mockSurahRepository = MockSurahRepository();
-    getDailyPrayUsecase = GetDailyPrayUsecase(surahRepository: mockSurahRepository);
+    getDailyPrayUsecase =
+        GetDailyPrayUsecase(surahRepository: mockSurahRepository);
   });
 
   group('Get Daily Pray Test', () {
     final tDailyPray = DataDailyPrayResponse.fromJson(
         json.decode(readJson('daily_pray.json')));
     final tDailyPrayEntities = tDailyPray.toEntity();
-    test('Should return all daily pray when call is successful', () async{
+    test('Should return all daily pray when call is successful', () async {
       // arrange
-      when(mockSurahRepository.getDailyPray()).thenAnswer((_) async => right(tDailyPrayEntities));
+      when(mockSurahRepository.getDailyPray())
+          .thenAnswer((_) async => right(tDailyPrayEntities));
 
       //act
       final result = await getDailyPrayUsecase.invoke();
@@ -37,9 +39,11 @@ void main(){
 
       expect(result, equals(right(tDailyPrayEntities)));
     });
-    test('Should return [DatabaseFailure] when call from local is unsuccessful', () async{
+    test('Should return [DatabaseFailure] when call from local is unsuccessful',
+        () async {
       // arrange
-      when(mockSurahRepository.getDailyPray()).thenAnswer((_) async => left(const DatabaseFailure(AppString.databaseError)));
+      when(mockSurahRepository.getDailyPray()).thenAnswer(
+          (_) async => left(const DatabaseFailure(AppString.databaseError)));
 
       //act
       final result = await getDailyPrayUsecase.invoke();
@@ -47,7 +51,8 @@ void main(){
       // assert
       verify(mockSurahRepository.getDailyPray());
 
-      expect(result, equals(left(const DatabaseFailure(AppString.databaseError))));
+      expect(
+          result, equals(left(const DatabaseFailure(AppString.databaseError))));
     });
-   });
+  });
 }

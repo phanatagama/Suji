@@ -39,7 +39,7 @@ void main() {
         surahRemoteDataSource: mockSurahRemoteDataSource,
         surahLocalDataSource: mockSurahLocalDataSource);
   });
-  
+
   group('Get Daily Pray', () {
     final tDailyPray = DataDailyPrayResponse.fromJson(
         json.decode(readJson('daily_pray.json')));

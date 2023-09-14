@@ -85,7 +85,6 @@ class AudioController extends GetxController {
         }
       } catch (e) {
         showErrorMessage(AppString.socketException);
-        
       }
     }
   }

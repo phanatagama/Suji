@@ -19,13 +19,14 @@ class ShalatRepositoryImpl implements ShalatRepository {
   ShalatRepositoryImpl(
       {required this.shalatRemoteDataSource,
       required this.shalatLocalDataSource,
-      required this.connectivity
-      });
+      required this.connectivity});
 
   @override
-  Future<Either<Failure, Shalat>> getShalatTime(DateTime dateTime, Position position) async {
+  Future<Either<Failure, Shalat>> getShalatTime(
+      DateTime dateTime, Position position) async {
     try {
-      final result = await shalatLocalDataSource.getShalatTime(dateTime, position);
+      final result =
+          await shalatLocalDataSource.getShalatTime(dateTime, position);
       if (result == null) {
         final data = await fetchShalatTime(dateTime, position);
         await shalatLocalDataSource.insertOrUpdateShalat(data);
@@ -44,12 +45,13 @@ class ShalatRepositoryImpl implements ShalatRepository {
     }
   }
 
-  
-  Future<List<Shalat>> fetchShalatTime(DateTime dateTime, Position position) async {
+  Future<List<Shalat>> fetchShalatTime(
+      DateTime dateTime, Position position) async {
     final hasConnected = await connectivity.checkConnectivity();
     if (hasConnected == ConnectivityResult.mobile ||
         hasConnected == ConnectivityResult.wifi) {
-      final result = await shalatRemoteDataSource.getShalatTime(dateTime, position);
+      final result =
+          await shalatRemoteDataSource.getShalatTime(dateTime, position);
       return result.toEntity();
     } else {
       throw const SocketException(AppString.socketException);

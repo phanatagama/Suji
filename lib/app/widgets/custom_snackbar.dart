@@ -11,6 +11,7 @@ showErrorMessage(String message) {
     backgroundColor: AppColors.error,
   );
 }
+
 showSuccessMessage(String message) {
   Get.snackbar(
     'information'.tr,

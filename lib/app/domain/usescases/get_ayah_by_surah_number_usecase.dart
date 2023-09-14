@@ -6,8 +6,7 @@ import 'package:suji/core/utils/failure.dart';
 class GetAyahBySurahNumberUsecase {
   final SurahRepository surahRepository;
   GetAyahBySurahNumberUsecase({required this.surahRepository});
-  Future<Either<Failure, List<SurahDetail>>> invoke(
-      int surahNumber) {
+  Future<Either<Failure, List<SurahDetail>>> invoke(int surahNumber) {
     return surahRepository.getAyahBySurahNumber(surahNumber);
   }
 }

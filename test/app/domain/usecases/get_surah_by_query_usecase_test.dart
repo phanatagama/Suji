@@ -12,13 +12,14 @@ import 'package:suji/core/values/constant.dart';
 import '../../../helper/test_helper.mocks.dart';
 import '../../../json_reader.dart';
 
-void main(){
+void main() {
   late SurahRepository mockSurahRepository;
   late GetSurahByQueryUsecase getSurahByQueryUsecase;
 
   setUp(() {
     mockSurahRepository = MockSurahRepository();
-    getSurahByQueryUsecase = GetSurahByQueryUsecase(surahRepository: mockSurahRepository);
+    getSurahByQueryUsecase =
+        GetSurahByQueryUsecase(surahRepository: mockSurahRepository);
   });
 
   group('Get Surah by Query Test', () {
@@ -26,9 +27,11 @@ void main(){
         ListSurah.fromJson(json.decode(readJson('list_surah_response.json')));
     final tSurahEntities = tSurahResponse.toEntity();
     final query = tSurahEntities.first.nameTransliterationId;
-    test('Should return all surah which matches query when call is successful', () async{
+    test('Should return all surah which matches query when call is successful',
+        () async {
       // arrange
-      when(mockSurahRepository.getSurahByQuery(query)).thenAnswer((_) async => right(tSurahEntities));
+      when(mockSurahRepository.getSurahByQuery(query))
+          .thenAnswer((_) async => right(tSurahEntities));
 
       //act
       final result = await getSurahByQueryUsecase.invoke(query);
@@ -38,9 +41,11 @@ void main(){
 
       expect(result, equals(right(tSurahEntities)));
     });
-    test('Should return [DatabaseFailure] when call from local is unsuccessful', () async{
+    test('Should return [DatabaseFailure] when call from local is unsuccessful',
+        () async {
       // arrange
-      when(mockSurahRepository.getSurahByQuery(query)).thenAnswer((_) async => left(const DatabaseFailure(AppString.databaseError)));
+      when(mockSurahRepository.getSurahByQuery(query)).thenAnswer(
+          (_) async => left(const DatabaseFailure(AppString.databaseError)));
 
       //act
       final result = await getSurahByQueryUsecase.invoke(query);
@@ -48,7 +53,8 @@ void main(){
       // assert
       verify(mockSurahRepository.getSurahByQuery(query));
 
-      expect(result, equals(left(const DatabaseFailure(AppString.databaseError))));
+      expect(
+          result, equals(left(const DatabaseFailure(AppString.databaseError))));
     });
-   });
+  });
 }
