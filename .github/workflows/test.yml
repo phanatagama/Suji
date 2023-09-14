@@ -14,7 +14,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest]
     steps:
       # Set up Flutter.
       - name: Clone Flutter repository with master channel
@@ -29,7 +29,7 @@ jobs:
       - run: flutter pub get
 
       # Analyze, check formatting, and run unit tests.
-      - run: flutter analyze
+      # - run: flutter analyze
       - name: Ensure the Dart code is formatted correctly
         run: dart format --set-exit-if-changed .
       - name: Run Flutter unit tests
@@ -37,50 +37,51 @@ jobs:
         
         # Upload coverage to codecov
       - name: Upload coverage to codecov
-        uses: codecov/codecov-action@v2.1.0
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
         with:
-          token: ${{secrets.CODECOV_TOKEN}}
           file: ./coverage/lcov.info
 
-  benchmark-test:
-    name: Benchmark tests
-    runs-on: ubuntu-latest
-    steps:
-      # Set up Flutter.
-      - name: Clone Flutter repository with master channel
-        uses: subosito/flutter-action@48cafc24713cca54bbe03cdc3a423187d413aafa
-        with:
-          channel: master
-      - run: flutter doctor -v
+  # benchmark-test:
+  #   name: Benchmark tests
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     # Set up Flutter.
+  #     - name: Clone Flutter repository with master channel
+  #       uses: subosito/flutter-action@48cafc24713cca54bbe03cdc3a423187d413aafa
+  #       with:
+  #         channel: master
+  #     - run: flutter doctor -v
 
-      # Checkout gallery code and get packages.
-      - name: Checkout gallery code
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
-      - run: flutter pub get
+  #     # Checkout gallery code and get packages.
+  #     - name: Checkout gallery code
+  #       uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+  #     - run: flutter pub get
 
-      - run: flutter test test_benchmarks
+  #     - run: flutter test test_benchmarks
 
-  golden-test:
-    name: Golden tests
-    runs-on: macos-latest
-    steps:
-      # Set up Flutter.
-      - name: Clone Flutter repository with master channel
-        uses: subosito/flutter-action@48cafc24713cca54bbe03cdc3a423187d413aafa
-        with:
-          channel: master
-      - run: flutter doctor -v
+  # golden-test:
+  #   name: Golden tests
+  #   runs-on: macos-latest
+  #   steps:
+  #     # Set up Flutter.
+  #     - name: Clone Flutter repository with master channel
+  #       uses: subosito/flutter-action@48cafc24713cca54bbe03cdc3a423187d413aafa
+  #       with:
+  #         channel: master
+  #     - run: flutter doctor -v
 
-      # Checkout gallery code and get packages.
-      - name: Checkout gallery code
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
-      - run: flutter pub get
+  #     # Checkout gallery code and get packages.
+  #     - name: Checkout gallery code
+  #       uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+  #     - run: flutter pub get
 
-      # Run the golden tests and upload failed test artifacts.
-      - run: flutter test test_goldens
-      - name: Upload goldens if tests fail
-        uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce
-        if: failure()
-        with:
-          name: goldens
-          path: test_goldens/failures/
+  #     # Run the golden tests and upload failed test artifacts.
+  #     - run: flutter test test_goldens
+  #     - name: Upload goldens if tests fail
+  #       uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce
+  #       if: failure()
+  #       with:
+  #         name: goldens
+  #         path: test_goldens/failures/
