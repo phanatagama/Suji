@@ -1,6 +1,7 @@
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 
-class LocationService {
+class LocationService extends GetxService{
   static LocationService? _instance;
 
   LocationService._internal() {
