@@ -22,7 +22,7 @@ Future<void> main() async {
   /// openBox for adzan alarm settings on [NotificationsController]
   final document = await getApplicationDocumentsDirectory();
   Hive.init(document.path);
-  await Hive.openBox('alarmSettings');
+  await Hive.openBox('sujiSettingsBox');
 
   /// Initialize the background service
   final backgroundService = BackgroundService();
@@ -36,12 +36,13 @@ Future<void> main() async {
   runApp(
     GetMaterialApp(
       translations: Languages(),
-      locale: Get.deviceLocale,
+      locale: const Locale('id'),
       fallbackLocale: const Locale('en', 'US'),
       theme: appTheme,
       title: 'Application',
-      initialRoute: AppPages.INITIAL,
-      // "/lab",
+      initialRoute:
+          // AppPages.INITIAL,
+          AppPages.menu,
       getPages: AppPages.routes,
       debugShowCheckedModeBanner: false,
     ),

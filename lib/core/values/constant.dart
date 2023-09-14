@@ -16,16 +16,28 @@ class AppAssets {
   // images & icons filepath constants
   static const imgBorderSurah = 'assets/images/border_surah.png';
   static const imgBannerHome = 'assets/images/home_banner.png';
+  static const imgMasjid = 'assets/images/masjid.jfif';
   static const imgBannerShalat = 'assets/images/salah_banner.png';
   static const iconShalatAshr = 'assets/images/Shalat-Ashar.png';
   static const iconShalatIsha = 'assets/images/Shalat-Isya.png';
   static const iconShalatMaghrib = 'assets/images/Shalat-Maghrib.png';
   static const iconShalatShubuh = 'assets/images/Shalat-Shubuh.png';
   static const iconShalatDzuhr = 'assets/images/Shalat-Zhuhur.png';
+  static const iconPrayerTime = 'assets/images/icon-prayer-time.png';
+  static const iconShalat = 'assets/images/icon-shalat.png';
+  static const iconQuran = 'assets/images/icon-quran.png';
+  static const iconTasbih = 'assets/images/icon-tasbih.png';
+
+  // data model json
+  static const jsonAsmaulHusna = 'assets/model/asmaul_husna.json';
+  static const jsonDailyPray = 'assets/model/daily_pray.json';
 }
 
 class AppString {
   AppString._();
+  //Database call message
+  static const databaseError = 'Database Error';
+  static const insertOrUpdateSuccess = 'Insert/Update Success';
 
   //Api call error
   static const cancelRequest = 'Request to API server was cancelled';
@@ -48,5 +60,16 @@ class AppString {
   static const badGateway = 'Bad Gateway';
   static const serviceUnavailable = 'Service Unavailable';
 
-  // static const appFont = 'Poppins';
+  // constant string
+  static const shubuh = 'Shubuh';
+  static const dzuhr = 'Dzuhur';
+  static const ashr = 'Ashr';
+  static const maghrib = 'Maghrib';
+  static const isha = 'Isha';
+  static const tasbihDigital = 'Tasbih Digital';
+  static const asmaulHusna = 'Asmaul Husna';
+  static const alQuran = 'Al-Quran';
+  static const alarm = 'Alarm';
+  static const refresh = 'Refresh';
+  static const surah = 'Surah';
 }

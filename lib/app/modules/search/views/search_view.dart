@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:suji/app/routes/app_pages.dart';
 import 'package:suji/app/widgets/box_placeholder.dart';
 import 'package:suji/core/theme/colors.dart';
-import 'package:suji/core/utils/base_state.dart';
 import '../controllers/search_controller.dart';
 
 class SearchView extends GetView<MySearchController> {
@@ -27,80 +26,167 @@ class SearchView extends GetView<MySearchController> {
   }
 
   Widget _buildSearchResult() {
-    return Obx(() {
-      if (controller.state == BaseState.loading) {
-        return Expanded(
-          child: ListView.separated(
-            shrinkWrap: true,
-            itemCount: 10,
-            physics: const BouncingScrollPhysics(),
-            separatorBuilder: (BuildContext context, int index) {
-              return Container(
-                height: 4.0,
-              );
+    return controller.obx(
+      _buildSearchResultSuccess,
+      onLoading: _buildSearchResultLoading(),
+      onError: _buildSearchResultError,
+      onEmpty: const SizedBox.shrink(),
+    );
+    // return Obx(() {
+    //   if (controller.state == BaseState.loading) {
+    //     return Expanded(
+    //       child: ListView.separated(
+    //         shrinkWrap: true,
+    //         itemCount: 10,
+    //         physics: const BouncingScrollPhysics(),
+    //         separatorBuilder: (BuildContext context, int index) {
+    //           return Container(
+    //             height: 4.0,
+    //           );
+    //         },
+    //         itemBuilder: (BuildContext context, int index) {
+    //           return const BoxPlaceholder(width: double.infinity, height: 64.0);
+    //         },
+    //       ),
+    //     );
+    //   } else if (controller.state == BaseState.error) {
+    //     Get.snackbar('information'.tr, controller.message,
+    //       snackPosition: SnackPosition.BOTTOM,
+    //       margin: const EdgeInsets.all(8.0),
+    //       backgroundColor: AppColors.error);
+    //     return Center(
+    //       child: IconButton(
+    //         onPressed: () async => await controller.getAllSurah(),
+    //         icon: const Icon(
+    //           Icons.replay,
+    //           size: 24,
+    //         ),
+    //       ),
+    //     );
+    //   } else if (controller.state == BaseState.success) {
+    //     return Expanded(
+    //       child: ListView.builder(
+    //         itemCount: controller.listSurah.length,
+    //         physics: const BouncingScrollPhysics(),
+    //         shrinkWrap: true,
+    //         itemBuilder: (BuildContext context, int index) {
+    //           final textTheme = Theme.of(context).textTheme;
+    //           final surah = controller.listSurah[index];
+    //           return InkWell(
+    //             onTap: () => Get.toNamed('${Routes.SURAH}/${surah.number}'),
+    //             child: Padding(
+    //               padding: const EdgeInsets.symmetric(horizontal: 8.0),
+    //               child: Card(
+    //                 child: ListTile(
+    //                   leading: CircleAvatar(
+    //                     backgroundColor: Colors.transparent,
+    //                     backgroundImage:
+    //                         const AssetImage('assets/images/border_surah.png'),
+    //                     child: Text(
+    //                       '${surah.number}',
+    //                       style: textTheme.titleLarge,
+    //                     ),
+    //                   ),
+    //                   title: Text(surah.nameTransliterationId, style: textTheme.titleLarge,),
+    //                   subtitle: Text('${surah.numberOfVerses} Ayat'),
+    //                   trailing: Text(
+    //                     surah.nameShort,
+    //                     style: textTheme.headlineSmall?.copyWith(color: AppColors.primary),
+    //                   ),
+    //                 ),
+    //               ),
+    //             ),
+    //           );
+    //         },
+    //       ),
+    //     );
+    //   } else {
+    //     return const Center(
+    //       child: Text(
+    //         'Empty',
+    //         style: TextStyle(
+    //           fontSize: 16.0,
+    //         ),
+    //       ),
+    //     );
+    //   }
+    // });
+  }
+
+  Widget _buildSearchResultError(errorMessage) {
+    return Center(
+      child: IconButton(
+        onPressed: () async => await controller.getAllSurah(),
+        icon: const Icon(
+          Icons.replay,
+          size: 24,
+        ),
+      ),
+    );
+  }
+
+  Expanded _buildSearchResultLoading() {
+    return Expanded(
+      child: ListView.separated(
+        shrinkWrap: true,
+        itemCount: 10,
+        physics: const BouncingScrollPhysics(),
+        separatorBuilder: (BuildContext context, int index) {
+          return Container(
+            height: 4.0,
+          );
+        },
+        itemBuilder: (BuildContext context, int index) {
+          return const BoxPlaceholder(width: double.infinity, height: 64.0);
+        },
+      ),
+    );
+  }
+
+  Widget _buildSearchResultSuccess(state) {
+    return Expanded(
+      child: ListView.builder(
+        itemCount: state?.length,
+        physics: const BouncingScrollPhysics(),
+        shrinkWrap: true,
+        itemBuilder: (BuildContext context, int index) {
+          final textTheme = Theme.of(context).textTheme;
+          final surah = state![index];
+          return InkWell(
+            onTap: () {
+              controller.setLastRead(surah.nameTransliterationId);
+              Get.toNamed('${Routes.SURAH}/${surah.number}');
             },
-            itemBuilder: (BuildContext context, int index) {
-              return const BoxPlaceholder(width: double.infinity, height: 64.0);
-            },
-          ),
-        );
-      } else if (controller.state == BaseState.error) {
-        return const Center(
-          child: Text(
-            'Something Wrong :(',
-            style: TextStyle(
-              fontSize: 16.0,
-            ),
-          ),
-        );
-      } else if (controller.state == BaseState.success) {
-        return Expanded(
-          child: ListView.builder(
-            itemCount: controller.listSurah.length,
-            physics: const BouncingScrollPhysics(),
-            shrinkWrap: true,
-            itemBuilder: (BuildContext context, int index) {
-              final textTheme = Theme.of(context).textTheme;
-              final surah = controller.listSurah[index];
-              return InkWell(
-                onTap: () => Get.toNamed('${Routes.SURAH}/${surah.number}'),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Card(
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: Colors.transparent,
-                        backgroundImage:
-                            const AssetImage('assets/images/border_surah.png'),
-                        child: Text(
-                          '${surah.number}',
-                          style: textTheme.titleLarge,
-                        ),
-                      ),
-                      title: Text(surah.nameTransliterationId, style: textTheme.titleLarge,),
-                      subtitle: Text('${surah.numberOfVerses} Ayat'),
-                      trailing: Text(
-                        surah.nameShort,
-                        style: textTheme.headlineSmall?.copyWith(color: AppColors.primary),
-                      ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Card(
+                child: ListTile(
+                  leading: CircleAvatar(
+                    backgroundColor: Colors.transparent,
+                    backgroundImage:
+                        const AssetImage('assets/images/border_surah.png'),
+                    child: Text(
+                      '${surah.number}',
+                      style: textTheme.titleLarge,
                     ),
                   ),
+                  title: Text(
+                    surah.nameTransliterationId,
+                    style: textTheme.titleLarge,
+                  ),
+                  subtitle: Text('${surah.numberOfVerses} Ayat'),
+                  trailing: Text(
+                    surah.nameShort,
+                    style: textTheme.headlineSmall
+                        ?.copyWith(color: AppColors.primary),
+                  ),
                 ),
-              );
-            },
-          ),
-        );
-      } else {
-        return const Center(
-          child: Text(
-            'Empty',
-            style: TextStyle(
-              fontSize: 16.0,
+              ),
             ),
-          ),
-        );
-      }
-    });
+          );
+        },
+      ),
+    );
   }
 
   Widget _buildSearchBar() {

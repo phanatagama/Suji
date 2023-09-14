@@ -1,5 +1,8 @@
+import 'dart:typed_data';
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:suji/core/utils/logger.dart';
 
@@ -29,11 +32,18 @@ class NotificationService {
 
   Future<void> showNotification(
       FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {
-    var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
+    final Int64List vibrationPattern = Int64List(4);
+    vibrationPattern[0] = 0;
+    vibrationPattern[1] = 1000;
+    vibrationPattern[2] = 5000;
+    vibrationPattern[3] = 2000;
+    final androidPlatformChannelSpecifics = AndroidNotificationDetails(
         _channelId, _channelName,
         channelDescription: _channelDesc,
         importance: Importance.max,
         priority: Priority.high,
+        sound: const RawResourceAndroidNotificationSound('mecca_56_22'),
+        vibrationPattern: vibrationPattern,
         ticker: 'ticker');
 
     var platformChannelSpecifics = NotificationDetails(
@@ -43,7 +53,7 @@ class NotificationService {
     await flutterLocalNotificationsPlugin.show(
       0,
       'Adzan',
-      'Waktunya Shalat {shalatTime}',
+      'Waktunya Shalat ${DateFormat('HH:mm').format(DateTime.now())}',
       platformChannelSpecifics,
       payload: 'plain notification',
     );

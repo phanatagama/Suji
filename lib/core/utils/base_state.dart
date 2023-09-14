@@ -1,1 +1,1 @@
-enum BaseState { loading, success, error, empty }
+// enum BaseState { loading, success, error, empty }

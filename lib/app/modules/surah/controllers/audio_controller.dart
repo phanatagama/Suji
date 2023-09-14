@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:suji/core/theme/colors.dart';
+import 'package:suji/app/widgets/custom_snackbar.dart';
+import 'package:suji/core/values/constant.dart';
 
 class AudioController extends GetxController {
+  Connectivity connectivity;
   final AudioPlayer _audioPlayer = AudioPlayer()
-    // ..setPlayerMode(PlayerMode.lowLatency)
     ..setReleaseMode(ReleaseMode.stop);
   AudioPlayer get audioPlayer => _audioPlayer;
   // final _playerState = PlayerState.stopped.obs;
@@ -23,12 +23,11 @@ class AudioController extends GetxController {
   late StreamSubscription _positionSubscription;
   late StreamSubscription _playerCompleteSubscription;
   late StreamSubscription _playerStateSubscription;
+  AudioController({required this.connectivity});
 
   @override
   void onInit() {
     super.onInit();
-    // print('Duration: ${_audioPlayer.getDuration()}');
-    // print('Position: ${_audioPlayer.getCurrentPosition()}');
     setupAudioPlayer();
   }
 
@@ -63,10 +62,6 @@ class AudioController extends GetxController {
     audioPlayer.onLog.listen((String message) {
       AudioLogger.log(message);
     }, onError: (Object e, [StackTrace? stackTrace]) {
-      Get.snackbar('Information', e.toString(),
-          snackPosition: SnackPosition.BOTTOM,
-          margin: const EdgeInsets.all(8.0),
-          backgroundColor: AppColors.error);
       AudioLogger.error(e, stackTrace);
     });
   }
@@ -75,29 +70,21 @@ class AudioController extends GetxController {
     if (selectedAudioIdx == index &&
         (audioPlayer.state == PlayerState.playing ||
             audioPlayer.state == PlayerState.paused)) {
-      // print('stop aja');
       await audioPlayer.stop();
       resetSelectedAudioIdx();
     } else {
       await audioPlayer.stop();
       try {
-        final hasConnected = await Connectivity().checkConnectivity();
+        final hasConnected = await connectivity.checkConnectivity();
         if (hasConnected == ConnectivityResult.mobile ||
             hasConnected == ConnectivityResult.wifi) {
           await audioPlayer.play(UrlSource(audioSource));
           _selectedAudioIdx.value = index;
         } else {
-          Get.snackbar(
-              'Information', 'Play Audio must be connect to internet!!!',
-              snackPosition: SnackPosition.BOTTOM,
-              margin: const EdgeInsets.all(8.0),
-              backgroundColor: AppColors.error);
+          showErrorMessage('audio_play_internet'.tr);
         }
       } catch (e) {
-        Get.snackbar('Information', 'Check your connection',
-            snackPosition: SnackPosition.BOTTOM,
-            margin: const EdgeInsets.all(8.0),
-            backgroundColor: AppColors.error);
+        showErrorMessage(AppString.socketException);
       }
     }
   }

@@ -1,5 +1,6 @@
 
 ![Suji](https://socialify.git.ci/phanatagama/suji/image?description=1&font=Rokkitt&forks=1&issues=1&language=1&name=1&pulls=1&stargazers=1&theme=Auto)
+[![codecov](https://codecov.io/gh/phanatagama/suji/branch/main/graph/badge.svg?token=F777RVVH55)](https://codecov.io/gh/phanatagama/suji)
 <p align="center">
 <img src="https://img.shields.io/badge/dart-%230175C2.svg?style=for-the-badge&logo=dart&logoColor=white" />
 <img src="https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white" />
