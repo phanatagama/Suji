@@ -2055,9 +2055,7 @@
             "abbreviated": "AH",
             "expanded": "Anno Hegirae"
           },
-          "holidays": [
-            "Lailat-ul-Miraj"
-          ]
+          "holidays": ["Lailat-ul-Miraj"]
         }
       },
       "meta": {
