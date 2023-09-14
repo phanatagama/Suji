@@ -4,6 +4,5 @@ import 'package:suji/app/domain/entities/shalat.dart';
 import 'package:suji/core/utils/failure.dart';
 
 abstract class ShalatRepository {
-  Future<Either<Failure, Shalat>> getShalatTime(Position position);
-  Future<void> fetchShalatTime(Position position);
+  Future<Either<Failure, Shalat>> getShalatTime(DateTime dateTime, Position position);
 }
