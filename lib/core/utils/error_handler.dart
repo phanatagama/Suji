@@ -2,10 +2,6 @@ import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:suji/core/values/constant.dart';
 
 dynamic errorHandler(Response response) {
-  // print(response.toString());
-  // print(response.statusCode);
-  // print(response.status);
-  // print(response.body);
   switch (response.statusCode) {
     case 200:
     case 201:

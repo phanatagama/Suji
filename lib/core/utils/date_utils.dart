@@ -5,7 +5,7 @@ class DateTimeUtils {
   const DateTimeUtils._();
 
   /// get prayer time
-  static getPrayerTime(Shalat shalatTime) {
+  static DateTime getPrayerTime(Shalat shalatTime) {
     final now = DateTime.now();
     final dateFormat = DateFormat('y/M/d');
     final completeFormat = DateFormat('y/M/d H:m:s');
