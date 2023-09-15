@@ -206,13 +206,6 @@ class TasbihView extends GetView<TasbihController> {
                   ),
                 ),
               ),
-              // Flexible(
-              //   fit: FlexFit.loose,
-              //   child: Container(
-              //     height: 100.0,
-              //     color: AppColors.primary,
-              //   ),
-              // ),
             ],
           ),
         ),

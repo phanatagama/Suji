@@ -96,13 +96,6 @@ class ShalatView extends GetView<ShalatController> {
                           fontWeight: FontWeight.bold),
                     ),
                   ),
-                  // Obx(() => Text(
-                  //       controller.shalat.metaTimezone ?? '-',
-                  //       style: const TextStyle(
-                  //           fontSize: 16.0,
-                  //           color: Colors.white,
-                  //           fontWeight: FontWeight.bold),
-                  //     )),
                   IconButton(
                     onPressed: () async => await controller.refreshLocation(),
                     icon: const Icon(

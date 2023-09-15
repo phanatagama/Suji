@@ -13,15 +13,6 @@ class ShalatController extends GetxController with StateMixin<Shalat> {
   ShalatController(
       {required this.getShalatTimeUsecase, required this.locationService});
 
-  // final _state = BaseState.empty.obs;
-  // BaseState get state => _state.value;
-
-  // final _message = ''.obs;
-  // String get message => _message.value;
-
-  // final _shalat = Shalat().obs;
-  // Shalat get shalat => _shalat.value;
-
   DateTime date = DateTime.now();
   Position? position;
 
@@ -60,18 +51,14 @@ class ShalatController extends GetxController with StateMixin<Shalat> {
   }
 
   Future<void> getShalatTime(Position position) async {
-    // _state.value = BaseState.loading;
     change(null, status: RxStatus.loading());
     final dataShalatTime = await getShalatTimeUsecase.invoke(date, position);
+
     dataShalatTime.fold((failure) {
-      // _message.value = failure.message;
-      // _state.value = BaseState.error;
       Log.e('[ShalatController][dataShalatTime]', failure.message);
       showErrorMessage(failure.message);
       change(null, status: RxStatus.error(failure.message));
     }, (result) {
-      // _shalat(result);
-      // _state.value = BaseState.success;
       change(result, status: RxStatus.success());
     });
   }

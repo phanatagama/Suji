@@ -61,12 +61,10 @@ class NotificationService {
 
   void _onDidReceiveNotificationResponse(NotificationResponse details) async {
     final payload = details.payload;
-    // print('_onDidReceiveNotificationResponse dijalankan');
     Log.d('[NotificationService][_onDidReceiveNotificationResponse]',
         'Triggered!!!');
     if (payload != null) {
       Log.d('[Notification Payload]', payload);
-      // print('notification payload: $payload');
     }
     selectNotificationSubject.add(payload);
   }

@@ -48,58 +48,6 @@ class MenuView extends GetView<MenuController> {
                       onError: _buildSurahError,
                       onEmpty: const SizedBox.shrink(),
                     ),
-                    // Obx(() {
-                    //   if (controller.state == BaseState.loading) {
-                    //     return const BoxPlaceholder();
-                    //   } else if (controller.state == BaseState.success) {
-                    //     return ListView.separated(
-                    //       itemCount: controller.dataDailyPray.length,
-                    //       shrinkWrap: true,
-                    //       physics: const NeverScrollableScrollPhysics(),
-                    //       separatorBuilder: (BuildContext context, int index) {
-                    //         return const Divider(
-                    //           color: AppColors.primary,
-                    //         );
-                    //       },
-                    //       itemBuilder: (BuildContext context, int index) {
-                    //         final dataDailyPray =
-                    //             controller.dataDailyPray[index];
-                    //         return GestureDetector(
-                    //           onTap: () => _showDaillyPrayDetail(dataDailyPray),
-                    //           child: ListTile(
-                    //             leading: const Icon(Icons.mosque),
-                    //             minLeadingWidth: 0.0,
-                    //             title: Text(dataDailyPray.title),
-                    //             trailing: const Icon(
-                    //               Icons.chevron_right,
-                    //               size: 24.0,
-                    //             ),
-                    //           ),
-                    //         );
-                    //       },
-                    //     );
-                    //   } else if (controller.state == BaseState.error) {
-                    //     Get.snackbar(
-                    //       'information'.tr,
-                    //       controller.message,
-                    //       snackPosition: SnackPosition.BOTTOM,
-                    //       margin: const EdgeInsets.all(8.0),
-                    //       backgroundColor: AppColors.error,
-                    //     );
-                    //     return Center(
-                    //       child: IconButton(
-                    //         onPressed: () async =>
-                    //             await controller.getDailyPray(),
-                    //         icon: const Icon(
-                    //           Icons.replay,
-                    //           size: 24.0,
-                    //         ),
-                    //       ),
-                    //     );
-                    //   } else {
-                    //     return const SizedBox.shrink();
-                    //   }
-                    // }),
                   ],
                 ),
               ),
@@ -223,7 +171,6 @@ class MenuView extends GetView<MenuController> {
                       margin: const EdgeInsets.only(top: 8.0),
                       alignment: Alignment.topCenter,
                       child: Column(
-                        // mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Container(
                             padding: const EdgeInsets.all(4.0),
@@ -257,7 +204,6 @@ class MenuView extends GetView<MenuController> {
                       margin: const EdgeInsets.only(top: 8.0),
                       alignment: Alignment.topCenter,
                       child: Column(
-                        // mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Container(
                             padding: const EdgeInsets.all(4.0),
@@ -291,7 +237,6 @@ class MenuView extends GetView<MenuController> {
                       margin: const EdgeInsets.only(top: 8.0),
                       alignment: Alignment.topCenter,
                       child: Column(
-                        // mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Container(
                             padding: const EdgeInsets.all(4.0),
@@ -325,7 +270,6 @@ class MenuView extends GetView<MenuController> {
                       margin: const EdgeInsets.only(top: 8.0),
                       alignment: Alignment.topCenter,
                       child: Column(
-                        // mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Container(
                             padding: const EdgeInsets.all(4.0),

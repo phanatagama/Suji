@@ -28,7 +28,7 @@ class BackgroundService extends GetxService {
 
   @pragma('vm:entry-point')
   static Future<void> callback() async {
-    Log.d('[BackgroundService][callback]', 'CALLBACK FIRED 2!!!');
+    Log.d('[BackgroundService][callback]', 'CALLBACK FIRED!!!');
     final notificationService = NotificationService();
     await notificationService.showNotification(flutterLocalNotificationsPlugin);
 
@@ -50,7 +50,6 @@ class BackgroundService extends GetxService {
   }
 
   Future<void> someTask() async {
-    // print('Updated data from the background isolate');
     Log.d('[BackgroundService][someTask]',
         'Updated data from the background isolate');
   }

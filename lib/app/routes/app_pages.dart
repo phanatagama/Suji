@@ -30,7 +30,8 @@ class AppPages {
   static const asmaulHusna = '/asmaul-husna';
 
   static final routes = [
-    GetPage(name: lab, page: () => Lab()),
+    // the LabView is for temporary directive UI Route
+    GetPage(name: lab, page: () => const Lab()),
     GetPage(
       name: _Paths.HOME,
       page: () => const HomeView(),

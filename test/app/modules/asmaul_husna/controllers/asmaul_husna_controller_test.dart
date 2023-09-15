@@ -5,7 +5,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 import 'package:mockito/mockito.dart';
 import 'package:suji/app/data/model/asmaul_husna_response.dart';
-import 'package:suji/app/domain/repository/surah_repository.dart';
 import 'package:suji/app/domain/usescases/get_asmaul_husna_usecase.dart';
 import 'package:suji/app/modules/asmaul_husna/controllers/asmaul_husna_controller.dart';
 

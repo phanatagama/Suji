@@ -9,15 +9,6 @@ class SurahController extends GetxController
 
   SurahController({required this.getAyahBySurahNumberUsecase});
 
-  // final _state = BaseState.empty.obs;
-  // BaseState get state => _state.value;
-
-  // final _message = ''.obs;
-  // String get message => _message.value;
-
-  // final List<SurahDetail> _listAyat = <SurahDetail>[].obs;
-  // List<SurahDetail> get listAyat => _listAyat;
-
   @override
   void onInit() async {
     super.onInit();
@@ -26,19 +17,14 @@ class SurahController extends GetxController
 
   /// get all ayah by surah number
   Future<void> getAyahBySurahNumber() async {
-    // _state.value = BaseState.loading;
     change([], status: RxStatus.loading());
     final result = await getAyahBySurahNumberUsecase
         .invoke(int.parse(Get.parameters['number']!));
 
     result.fold((failure) {
-      // _message.value = failure.message;
-      // _state.value = BaseState.error;
       showErrorMessage(failure.message);
       change([], status: RxStatus.error(failure.message));
     }, (surahData) {
-      // _listAyat.assignAll(surahData);
-      // _state.value = BaseState.success;
       change(surahData, status: RxStatus.success());
     });
   }

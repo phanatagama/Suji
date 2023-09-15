@@ -10,8 +10,8 @@ import 'package:suji/core/utils/date_utils.dart';
 class NotificationController extends GetxController {
   final ShalatRepository shalatRepository = Get.find<ShalatRepository>();
 
-  Box box = Hive.box('sujiSettingsBox');
-  final _isAlarmActive = false.obs;
+  final Box box = Hive.box('sujiSettingsBox');
+  final RxBool _isAlarmActive = false.obs;
   bool get isAlarmActive => _isAlarmActive.value;
 
   @override
@@ -31,7 +31,6 @@ class NotificationController extends GetxController {
   }
 
   _startAlarm(Shalat shalatTime) async {
-    // await NotificationService().showNotification(flutterLocalNotificationsPlugin);
     showSuccessMessage('alarm setup actived'.tr);
     return await AndroidAlarmManager.oneShotAt(
         DateTimeUtils.getPrayerTime(shalatTime), 0, BackgroundService.callback,

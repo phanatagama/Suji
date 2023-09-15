@@ -32,7 +32,7 @@ class HomeView extends GetView<HomeController> {
         ),
         actions: [
           IconButton(
-            onPressed: () => controller.toSearchPage(),
+            onPressed: controller.toSearchPage,
             tooltip: 'search'.tr,
             icon: const Icon(
               Icons.search,
@@ -49,57 +49,7 @@ class HomeView extends GetView<HomeController> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Row(
-                //   children: [
-                //     IconButton(
-                //       onPressed: () => Get.back(),
-                //       tooltip: 'back'.tr,
-                //       icon: const Icon(
-                //         Icons.arrow_back_ios,
-                //         size: 24.0,
-                //       ),
-                //     ),
-                //     const Padding(
-                //       padding: EdgeInsets.all(8.0),
-                //       child: Text(
-                //         'Suka Ngaji App',
-                //         style: TextStyle(
-                //           color: Color(0xFF672CBC),
-                //           fontSize: 24.0,
-                //           fontWeight: FontWeight.bold,
-                //         ),
-                //       ),
-                //     ),
-                //     const Spacer(),
-                //     IconButton(
-                //       onPressed: () => Get.toNamed('/search'),
-                //       tooltip: 'Cari',
-                //       icon: const Icon(
-                //         Icons.search,
-                //         size: 24.0,
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                // Padding(
-                //   padding: const EdgeInsets.all(8.0),
-                //   child: Column(
-                //     crossAxisAlignment: CrossAxisAlignment.start,
-                //     children: [
-                //       Text('greeting'.tr,
-                //           style: Get.textTheme.headlineMedium
-                //               ?.copyWith(fontWeight: medium)),
-                //       Text(
-                //         'user'.tr,
-                //         style: Get.textTheme.displayMedium,
-                //       ),
-                //     ],
-                //   ),
-                // ),
-                _buildHomeBanner(),
-                _buildSurahList()
-              ],
+              children: [_buildHomeBanner(), _buildSurahList()],
             ),
           ),
         ),
@@ -266,7 +216,6 @@ class HomeView extends GetView<HomeController> {
         ),
         Positioned.fill(
           child: Padding(
-            // color: Colors.black,
             padding: const EdgeInsets.all(20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -303,14 +252,6 @@ class HomeView extends GetView<HomeController> {
                 const SizedBox(
                   height: 8.0,
                 ),
-                // const Text(
-                //   'Ayat No: 1',
-                //   style: TextStyle(
-                //     fontSize: 14.0,
-                //     fontWeight: FontWeight.w400,
-                //     color: Colors.white,
-                //   ),
-                // ),
               ],
             ),
           ),

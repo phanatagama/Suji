@@ -201,24 +201,22 @@ class MockSurahRepository extends _i1.Mock implements _i8.SurahRepository {
         )),
       ) as _i10.Future<_i2.Either<_i11.Failure, List<_i14.Surah>>>);
   @override
-  _i10.Future<
-      _i2.Either<_i11.Failure, List<_i15.SurahDetail>>> getAyahBySurahNumber(
-          int? surahNumber) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getAyahBySurahNumber,
-          [surahNumber],
-        ),
-        returnValue:
-            _i10.Future<_i2.Either<_i11.Failure, List<_i15.SurahDetail>>>.value(
+  _i10.Future<_i2.Either<_i11.Failure, List<_i15.SurahDetail>>>
+      getAyahBySurahNumber(int? surahNumber) => (super.noSuchMethod(
+            Invocation.method(
+              #getAyahBySurahNumber,
+              [surahNumber],
+            ),
+            returnValue: _i10
+                .Future<_i2.Either<_i11.Failure, List<_i15.SurahDetail>>>.value(
                 _FakeEither_0<_i11.Failure, List<_i15.SurahDetail>>(
-          this,
-          Invocation.method(
-            #getAyahBySurahNumber,
-            [surahNumber],
-          ),
-        )),
-      ) as _i10.Future<_i2.Either<_i11.Failure, List<_i15.SurahDetail>>>);
+              this,
+              Invocation.method(
+                #getAyahBySurahNumber,
+                [surahNumber],
+              ),
+            )),
+          ) as _i10.Future<_i2.Either<_i11.Failure, List<_i15.SurahDetail>>>);
   @override
   _i10.Future<_i2.Either<_i11.Failure, List<_i16.DailyPray>>> getDailyPray() =>
       (super.noSuchMethod(
@@ -237,24 +235,22 @@ class MockSurahRepository extends _i1.Mock implements _i8.SurahRepository {
         )),
       ) as _i10.Future<_i2.Either<_i11.Failure, List<_i16.DailyPray>>>);
   @override
-  _i10.Future<
-      _i2
-          .Either<_i11.Failure, List<_i17.AsmaulHusna>>> getAsmaulHusna() =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getAsmaulHusna,
-          [],
-        ),
-        returnValue:
-            _i10.Future<_i2.Either<_i11.Failure, List<_i17.AsmaulHusna>>>.value(
+  _i10.Future<_i2.Either<_i11.Failure, List<_i17.AsmaulHusna>>>
+      getAsmaulHusna() => (super.noSuchMethod(
+            Invocation.method(
+              #getAsmaulHusna,
+              [],
+            ),
+            returnValue: _i10
+                .Future<_i2.Either<_i11.Failure, List<_i17.AsmaulHusna>>>.value(
                 _FakeEither_0<_i11.Failure, List<_i17.AsmaulHusna>>(
-          this,
-          Invocation.method(
-            #getAsmaulHusna,
-            [],
-          ),
-        )),
-      ) as _i10.Future<_i2.Either<_i11.Failure, List<_i17.AsmaulHusna>>>);
+              this,
+              Invocation.method(
+                #getAsmaulHusna,
+                [],
+              ),
+            )),
+          ) as _i10.Future<_i2.Either<_i11.Failure, List<_i17.AsmaulHusna>>>);
 }
 
 /// A class which mocks [ShalatLocalDataSource].

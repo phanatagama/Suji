@@ -45,21 +45,6 @@ class SurahView extends GetView<SurahController> {
               ),
             );
           }, onError: (_) => const SizedBox.shrink()),
-          // Obx(() {
-          //   if (controller.status == RxStatus.success()) {
-          //     return IconButton(
-          //       onPressed: () =>
-          //           _showTafsirBottomsheet(controller.state!.first.tafsirId),
-          //       icon: Icon(
-          //         Icons.info_outline,
-          //         size: 24.w,
-          //         color: Colors.white,
-          //       ),
-          //     );
-          //   } else {
-          //     return Container();
-          //   }
-          // }),
         ],
       ),
       body: SafeArea(
@@ -68,10 +53,6 @@ class SurahView extends GetView<SurahController> {
             padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: Column(
               children: [
-                // SizedBox(
-                //   height: 45.h,
-                // ),
-                // _buildNavBar(),
                 SizedBox(
                   height: 24.h,
                 ),
@@ -93,153 +74,6 @@ class SurahView extends GetView<SurahController> {
         onError: _buildAyahListError,
         onLoading: _buildAyahListLoading(),
         onEmpty: const SizedBox.shrink());
-    // return Obx(() {
-    //   if (controller.state == BaseState.loading) {
-    //     return ListView.separated(
-    //       itemCount: 10,
-    //       shrinkWrap: true,
-    //       physics: const NeverScrollableScrollPhysics(),
-    //       separatorBuilder: (BuildContext context, int index) {
-    //         return Container(
-    //           height: 4.h,
-    //         );
-    //       },
-    //       itemBuilder: (BuildContext context, int index) {
-    //         return BoxPlaceholder(
-    //           width: double.infinity,
-    //           height: 64.h,
-    //         );
-    //       },
-    //     );
-    //   } else if (controller.state == BaseState.error) {
-    //     Get.snackbar('information'.tr, controller.message,
-    //         snackPosition: SnackPosition.BOTTOM,
-    //         margin: const EdgeInsets.all(8.0),
-    //         backgroundColor: AppColors.error);
-    //     return Center(
-    //       child: IconButton(
-    //         onPressed: () async => await controller.getAyahBySurahNumber(),
-    //         icon: Icon(
-    //           Icons.replay,
-    //           size: 24.h,
-    //         ),
-    //       ),
-    //     );
-    //   } else if (controller.state == BaseState.success &&
-    //       controller.listAyat.isNotEmpty) {
-    //     return ListView.builder(
-    //       shrinkWrap: true,
-    //       physics: const NeverScrollableScrollPhysics(),
-    //       itemCount: controller.listAyat.length,
-    //       itemBuilder: (context, index) {
-    //         final ayah = controller.listAyat[index];
-    //         return SizedBox(
-    //           width: double.infinity,
-    //           child: Column(
-    //             crossAxisAlignment: CrossAxisAlignment.start,
-    //             children: [
-    //               Container(
-    //                 decoration: BoxDecoration(
-    //                   color: AppColors.secondary,
-    //                   borderRadius: BorderRadius.all(
-    //                     Radius.circular(10.r),
-    //                   ),
-    //                 ),
-    //                 child: Padding(
-    //                   padding: EdgeInsets.all(10.w),
-    //                   child: Row(
-    //                     children: [
-    //                       CircleAvatar(
-    //                         radius: 16.r,
-    //                         backgroundColor: AppColors.primaryContainer,
-    //                         child: Text(
-    //                           '${ayah.versesNumberInSurah}',
-    //                           style: TextStyle(
-    //                             fontSize: 14.sp,
-    //                             fontWeight: medium,
-    //                             color: Colors.white,
-    //                           ),
-    //                         ),
-    //                       ),
-    //                       const Spacer(),
-    //                       IconButton(
-    //                         tooltip: 'Bagikan',
-    //                         onPressed: () {
-    //                           final textAyah =
-    //                               '''
-    //                             Surah : ${ayah.nameTransliterationId}
-    //                             Ayah : ${ayah.versesNumberInSurah}
-    //                             ${ayah.versesTextArab}
-    //                             Tafsir:
-    //                             ${ayah.versesTafsirIdShort}''';
-    //                           Share.share(textAyah);
-    //                         },
-    //                         icon: const Icon(
-    //                           Icons.share,
-    //                           color: AppColors.primary,
-    //                         ),
-    //                       ),
-    //                       AudioPlayerWidget(
-    //                         index: index,
-    //                         ayah: ayah,
-    //                       ),
-    //                       IconButton(
-    //                         tooltip: 'Tafsir',
-    //                         onPressed: () => _showTafsirBottomsheet(
-    //                             ayah.versesTafsirIdShort),
-    //                         icon: const Icon(
-    //                           Icons.document_scanner,
-    //                           color: AppColors.primary,
-    //                         ),
-    //                       ),
-    //                     ],
-    //                   ),
-    //                 ),
-    //               ),
-    //               SizedBox(
-    //                 height: 24.h,
-    //               ),
-    //               Align(
-    //                 alignment: Alignment.centerRight,
-    //                 child: Text(
-    //                   ayah.versesTextArab,
-    //                   textDirection: TextDirection.rtl,
-    //                   style: TextStyle(
-    //                       fontSize: 18.sp, fontWeight: FontWeight.w700),
-    //                 ),
-    //               ),
-    //               SizedBox(
-    //                 height: 16.h,
-    //               ),
-    //               Text(
-    //                 ayah.versesTranslationId,
-    //                 textAlign: TextAlign.justify,
-    //                 style:
-    //                     TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w400),
-    //               ),
-    //               SizedBox(
-    //                 height: 16.h,
-    //               ),
-    //             ],
-    //           ),
-    //         );
-    //       },
-    //     );
-    //   } else {
-    //     Log.d('[SurahView][controller.state]', controller.state.toString());
-    //     Log.d('[SurahView][controller.listAyat.isNotEmpty]',
-    //         controller.listAyat.isNotEmpty.toString());
-    //     return Center(
-    //       child: IconButton(
-    //         onPressed: () async => await controller.getAyahBySurahNumber(),
-    //         icon: Icon(
-    //           Icons.replay,
-    //           size: 24.h,
-    //         ),
-    //       ),
-    //     );
-    //   }
-    // });
   }
 
   Widget _buildAyahListSuccess(listAyah) {
@@ -478,80 +312,7 @@ class SurahView extends GetView<SurahController> {
               onError: (error) => const SizedBox.shrink(),
               onLoading: const SizedBox.shrink(),
               onEmpty: const SizedBox.shrink(),
-            )
-            // Obx(() {
-            //   if (controller.state == BaseState.success &&
-            //       controller.listAyat.isNotEmpty) {
-            //     return Column(
-            //       crossAxisAlignment: CrossAxisAlignment.center,
-            //       mainAxisAlignment: MainAxisAlignment.center,
-            //       children: [
-            //         Text(
-            //           controller.listAyat.first.nameTransliterationId,
-            //           style: TextStyle(
-            //             fontSize: 26.sp,
-            //             fontWeight: FontWeight.w500,
-            //             color: Colors.white,
-            //           ),
-            //         ),
-            //         SizedBox(
-            //           height: 4.h,
-            //         ),
-            //         Text(
-            //           controller.listAyat.first.nameTranslationId,
-            //           style: TextStyle(
-            //             fontSize: 16.sp,
-            //             fontWeight: FontWeight.w500,
-            //             color: Colors.white,
-            //           ),
-            //         ),
-            //         SizedBox(
-            //           height: 16.h,
-            //         ),
-            //         Row(
-            //           children: [
-            //             SizedBox(
-            //               width: 63.w,
-            //             ),
-            //             const Expanded(
-            //               child: Divider(
-            //                 color: Colors.white,
-            //               ),
-            //             ),
-            //             SizedBox(
-            //               width: 63.w,
-            //             ),
-            //           ],
-            //         ),
-            //         SizedBox(
-            //           height: 16.h,
-            //         ),
-            //         Text(
-            //           '${controller.listAyat.first.relevationId} - ${controller.listAyat.first.numberOfVerses} ayat',
-            //           style: TextStyle(
-            //             fontSize: 14.sp,
-            //             fontWeight: FontWeight.w500,
-            //             color: Colors.white,
-            //           ),
-            //         ),
-            //         SizedBox(
-            //           height: 32.sp,
-            //         ),
-            //         Text(
-            //           'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',
-            //           style: TextStyle(
-            //             fontSize: 32.sp,
-            //             fontWeight: FontWeight.w500,
-            //             color: Colors.white,
-            //           ),
-            //         ),
-            //       ],
-            //     );
-            //   } else {
-            //     return Container();
-            //   }
-            // }),
-            ),
+            )),
       ),
     );
   }
@@ -588,7 +349,6 @@ class SurahView extends GetView<SurahController> {
                   width: Get.width,
                   child: ElevatedButton(
                     style: ButtonStyle(
-                        // backgroundColor: MaterialStatePropertyAll(textColor1),
                         shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
@@ -611,60 +371,6 @@ class SurahView extends GetView<SurahController> {
       isScrollControlled: true,
     );
   }
-
-  // Widget _buildNavBar() {
-  //   return Row(
-  //     children: [
-  //       IconButton(
-  //         onPressed: () => Get.back(),
-  //         tooltip: 'Kembali',
-  //         icon: Icon(
-  //           Icons.arrow_back,
-  //           size: 24.w,
-  //         ),
-  //       ),
-  //       Obx(() {
-  //         if (controller.state == BaseState.loading) {
-  //           return BoxPlaceholder(
-  //             height: 24.h,
-  //           );
-  //         } else if (controller.state == BaseState.error) {
-  //           return Text(
-  //             '-',
-  //             style: TextStyle(
-  //               fontSize: 20.sp,
-  //             ),
-  //           );
-  //         } else if (controller.state == BaseState.success) {
-  //           return Text(
-  //             '${controller.listAyat.firstOrNull?.nameTransliterationId}',
-  //             style: TextStyle(
-  //               // color: textColor1,
-  //               fontSize: 20.sp,
-  //               fontWeight: FontWeight.bold,
-  //             ),
-  //           );
-  //         } else {
-  //           return Text(
-  //             '-',
-  //             style: TextStyle(
-  //               fontSize: 20.sp,
-  //             ),
-  //           );
-  //         }
-  //       }),
-  //       const Spacer(),
-  //       IconButton(
-  //         onPressed: () {},
-  //         icon: Icon(
-  //           Icons.info_outline,
-  //           size: 24.w,
-  //           color: AppColors.primaryContainer,
-  //         ),
-  //       ),
-  //     ],
-  //   );
-  // }
 }
 
 class AudioPlayerWidget extends GetView<AudioController> {
