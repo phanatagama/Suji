@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class TasbihController extends GetxController {
@@ -16,12 +17,17 @@ class TasbihController extends GetxController {
     if (value >= 0 && value <= target) {
       _counter.value = value;
     }
+    if (value >= target) {
+      HapticFeedback.heavyImpact();
+      SystemSound.play(SystemSoundType.click);
+    }
   }
 
   int get counter => _counter.value;
 
+
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
     textEditingController.text = target.toString();
   }

@@ -2,9 +2,80 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:suji/core/theme/colors.dart';
 
-class Lab extends StatelessWidget {
-  const Lab({super.key});
+import 'package:sklite/SVM/SVM.dart';
+import 'package:sklite/utils/io.dart';
+import 'dart:convert';
+
+import 'package:suji/core/utils/logger.dart';
+
+class Lab extends StatefulWidget {
+  Lab({super.key});
+
+  @override
+  State<Lab> createState() => _LabState();
+}
+
+class _LabState extends State<Lab> {
+
   // double heroItemHeight = 100;
+  List<double> dataImage = [
+    0.03316327,
+    0.00455927,
+    0.04498978,
+    0.02641879,
+    0.08202388,
+    0.75096556,
+    0.22602083,
+    0.03840632,
+    0.02575107,
+    0.02879327,
+    0.09385351,
+    0.0621526,
+    0.02576809,
+    0.04793609,
+    0.04793609,
+    0.02321429,
+    0.02209302,
+    0.02209302,
+    0.55149208,
+    0.02098601,
+    0.27913858,
+    0.03028009,
+    0.00575185,
+    0.24807552,
+    0.06114732,
+    0.0621526,
+    0.16943942,
+    0.00104657,
+    0.00104657,
+    0.22940744,
+    0.26001466,
+    0.04238588,
+    0.00240964,
+    0.11270492,
+    0.6150312,
+    0.00928998,
+    0.25730633,
+    0.06803631,
+    0.91335248
+  ];
+
+  List<double> dataImage2 = [0.28741497, .0        , 0.22563054, 0.08317025, .0        ,
+        0.94833635, 0.35817974, 0.06317301, 0.14216738, 0.07570366,
+        .0        , .0        , 0.14271556, 0.18175766, 0.18175766,
+        0.07857143, 0.16550388, 0.16550388, 0.91751611, .0        ,
+        0.24689872, 0.25018925, .0        , 0.18990212, 0.11577795,
+        .0        , 0.10189997, .0        , .0        , 0.1545808 ,
+        0.40186217, 0.03970081, .0        , 0.20081967, 0.90792542,
+        0.00796284, 0.39181199, 0.06591994, 0.92062445];
+  Future<void> predictImage(data) async {
+    final model = await loadModel('assets/model/model.json');
+    final svc = SVC.fromMap(json.decode(model));
+    final result = svc.predict(data);
+    Log.d('[HASIL PREDIKSI]', result.toString());
+    Log.d('[MODEL]', model.toString());
+    Get.snackbar('Hasil Prediksi', result.toString());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +120,9 @@ class Lab extends StatelessWidget {
                         left: 0,
                         right: 0,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () async{
+                            await predictImage(dataImage);
+                          },
                           style: ButtonStyle(
                               shadowColor:
                                   MaterialStateProperty.all(Colors.black),
@@ -85,7 +158,9 @@ class Lab extends StatelessWidget {
                       Positioned(
                         top: 0,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () async{
+                            await predictImage(dataImage2);
+                          },
                           style: ButtonStyle(
                               shape: MaterialStateProperty.all(
                                   const CircleBorder(
@@ -228,131 +303,4 @@ class Lab extends StatelessWidget {
       ),
     );
   }
-
-  // Stack _buildHeroItem() {
-  //   return Stack(
-  //     // fit: StackFit.expand,
-  //     children: [
-  //       Container(
-  //         height: Get.height * 0.2,
-  //         decoration: const BoxDecoration(
-  //           color: Colors.orange,
-  //         ),
-  //       ),
-  //       Transform.translate(
-  //         offset: const Offset(0.0, 100),
-  //         child: Center(
-  //           child: Container(
-  //             width: Get.width * 0.8,
-  //             padding: const EdgeInsets.all(8.0),
-  //             decoration: const BoxDecoration(
-  //               color: Colors.white,
-  //               boxShadow: [
-  //                 BoxShadow(
-  //                     color: Colors.black12,
-  //                     blurRadius: 16.0,
-  //                     offset: Offset(.0, 6.0))
-  //               ],
-  //               borderRadius: BorderRadius.all(
-  //                 Radius.circular(
-  //                   8.0,
-  //                 ),
-  //               ),
-  //             ),
-  //             child: SingleChildScrollView(
-  //               scrollDirection: Axis.horizontal,
-  //               controller: ScrollController(),
-  //               child: Row(
-  //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //                 mainAxisSize: MainAxisSize.min,
-  //                 children: [
-  //                   Container(
-  //                     width: 100,
-  //                     color: Colors.green,
-  //                     child: const Column(
-  //                       mainAxisAlignment: MainAxisAlignment.center,
-  //                       children: [
-  //                         Icon(
-  //                           Icons.photo_camera_outlined,
-  //                           size: 20.0,
-  //                           color: Colors.red,
-  //                         ),
-  //                         Text(
-  //                           'Jadwal Shalat',
-  //                           maxLines: 2,
-  //                           overflow: TextOverflow.ellipsis,
-  //                           textAlign: TextAlign.center,
-  //                         ),
-  //                       ],
-  //                     ),
-  //                   ),
-  //                   Container(
-  //                     width: 100,
-  //                     color: Colors.green,
-  //                     child: const Column(
-  //                       mainAxisAlignment: MainAxisAlignment.center,
-  //                       children: [
-  //                         Icon(
-  //                           Icons.photo_camera_outlined,
-  //                           size: 20.0,
-  //                           color: Colors.red,
-  //                         ),
-  //                         Text(
-  //                           'Jadwal Shalat',
-  //                           maxLines: 2,
-  //                           overflow: TextOverflow.ellipsis,
-  //                           textAlign: TextAlign.center,
-  //                         ),
-  //                       ],
-  //                     ),
-  //                   ),
-  //                   Container(
-  //                     width: 100,
-  //                     color: Colors.green,
-  //                     child: const Column(
-  //                       mainAxisAlignment: MainAxisAlignment.center,
-  //                       children: [
-  //                         Icon(
-  //                           Icons.photo_camera_outlined,
-  //                           size: 20.0,
-  //                           color: Colors.red,
-  //                         ),
-  //                         Text(
-  //                           'Jadwal Shalat',
-  //                           maxLines: 2,
-  //                           overflow: TextOverflow.ellipsis,
-  //                           textAlign: TextAlign.center,
-  //                         ),
-  //                       ],
-  //                     ),
-  //                   ),
-  //                   Container(
-  //                     width: 100,
-  //                     color: Colors.green,
-  //                     child: const Column(
-  //                       mainAxisAlignment: MainAxisAlignment.center,
-  //                       children: [
-  //                         Icon(
-  //                           Icons.photo_camera_outlined,
-  //                           size: 20.0,
-  //                           color: Colors.red,
-  //                         ),
-  //                         Text(
-  //                           'Jadwal Shalat',
-  //                           maxLines: 2,
-  //                           overflow: TextOverflow.ellipsis,
-  //                           textAlign: TextAlign.center,
-  //                         ),
-  //                       ],
-  //                     ),
-  //                   ),
-  //                 ],
-  //               ),
-  //             ),
-  //           ),
-  //         ),
-  //       ),
-  //     ],
-  //   );
-  // }
 }

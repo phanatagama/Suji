@@ -1,5 +1,6 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:suji/app/data/services/location_service.dart';
 import 'package:suji/app/domain/entities/shalat.dart';
 import 'package:suji/app/domain/usescases/get_shalat_time_usecase.dart';
@@ -13,19 +14,22 @@ class ShalatController extends GetxController with StateMixin<Shalat> {
   ShalatController(
       {required this.getShalatTimeUsecase, required this.locationService});
 
-  DateTime date = DateTime.now();
+  final _date = DateTime.now().obs;
+  get date => DateFormat('dd MMM y').format(_date.value);
   Position? position;
+
+
 
   nextDay() async {
     if (position != null) {
-      date = date.add(const Duration(days: 1));
+      _date.value = _date.value.add(const Duration(days: 1));
       await getShalatTime(position!);
     }
   }
 
   beforeDay() async {
     if (position != null) {
-      date = date.subtract(const Duration(days: 1));
+      _date.value = _date.value.subtract(const Duration(days: 1));
       await getShalatTime(position!);
     }
   }
@@ -52,7 +56,7 @@ class ShalatController extends GetxController with StateMixin<Shalat> {
 
   Future<void> getShalatTime(Position position) async {
     change(null, status: RxStatus.loading());
-    final dataShalatTime = await getShalatTimeUsecase.invoke(date, position);
+    final dataShalatTime = await getShalatTimeUsecase.invoke(_date.value, position);
 
     dataShalatTime.fold((failure) {
       Log.e('[ShalatController][dataShalatTime]', failure.message);

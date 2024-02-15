@@ -41,8 +41,8 @@ Future<void> main() async {
       theme: appTheme,
       title: 'Application',
       initialRoute:
-          // AppPages.INITIAL,
-          AppPages.menu,
+          AppPages.splash,
+          // AppPages.lab,
       getPages: AppPages.routes,
       debugShowCheckedModeBanner: false,
     ),

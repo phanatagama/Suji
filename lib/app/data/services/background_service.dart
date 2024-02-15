@@ -27,7 +27,7 @@ class BackgroundService extends GetxService {
   }
 
   @pragma('vm:entry-point')
-  static Future<void> callback() async {
+  static void callback() async {
     Log.d('[BackgroundService][callback]', 'CALLBACK FIRED!!!');
     final notificationService = NotificationService();
     await notificationService.showNotification(flutterLocalNotificationsPlugin);

@@ -39,7 +39,7 @@ class Languages extends Translations {
           'information': 'Informasi',
           'alarm setup failed': 'Gagal menjadwalkan alarm',
           'alarm setup actived': 'Alarm diaktifkan',
-          'alarm setup deactived': 'Alarm dinonaktifka',
+          'alarm setup deactived': 'Alarm dinonaktifkan',
           'daily_pray': 'Doa Harian',
           'daily_pray_reminder': 'Jangan lupa baca doa',
           'search': 'Cari',

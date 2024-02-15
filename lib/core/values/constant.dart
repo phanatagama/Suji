@@ -18,6 +18,7 @@ class AppAssets {
   static const imgBannerHome = 'assets/images/home_banner.png';
   static const imgMasjid = 'assets/images/masjid.jfif';
   static const imgBannerShalat = 'assets/images/salah_banner.png';
+  static const appIcon = 'assets/images/app_icon.png';
   static const iconShalatAshr = 'assets/images/Shalat-Ashar.png';
   static const iconShalatIsha = 'assets/images/Shalat-Isya.png';
   static const iconShalatMaghrib = 'assets/images/Shalat-Maghrib.png';
@@ -27,6 +28,9 @@ class AppAssets {
   static const iconShalat = 'assets/images/icon-shalat.png';
   static const iconQuran = 'assets/images/icon-quran.png';
   static const iconTasbih = 'assets/images/icon-tasbih.png';
+
+  // animation
+  static const animationNotFound = 'assets/animation/animation_not_found.json';
 
   // data model json
   static const jsonAsmaulHusna = 'assets/model/asmaul_husna.json';

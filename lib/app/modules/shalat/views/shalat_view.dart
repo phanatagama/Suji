@@ -1,6 +1,8 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
 import 'package:suji/app/modules/shalat/controllers/notification_controller.dart';
 import 'package:suji/app/modules/shalat/controllers/shalat_controller.dart';
 import 'package:suji/app/widgets/box_placeholder.dart';
@@ -162,15 +164,17 @@ class ShalatView extends GetView<ShalatController> {
                             size: 16.0,
                           ),
                         ),
-                        controller.obx((state) {
-                          return Text(
-                            state?.dateReadable ?? '-',
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                                fontSize: 24.0, fontWeight: FontWeight.bold),
+                        Obx(() {
+                          return Flexible(
+                            child: AutoSizeText(
+                              controller.date,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                  fontSize: 24.0, fontWeight: FontWeight.bold),
+                            ),
                           );
-                        }, onError: (_) => const SizedBox.shrink()),
+                        }),
                         IconButton(
                           onPressed: () async => controller.nextDay(),
                           icon: const Icon(
@@ -418,7 +422,7 @@ class ShalatView extends GetView<ShalatController> {
               ],
             );
           },
-          onError: (_) => const SizedBox.shrink(),
+          onError: (_) => LottieBuilder.asset(AppAssets.animationNotFound, width: 200.0, height: 200,fit: BoxFit.contain,),
           onLoading: ListView.separated(
             itemCount: 5,
             shrinkWrap: true,
