@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -7,18 +9,19 @@ import 'package:suji/app/domain/usescases/get_shalat_time_usecase.dart';
 import 'package:suji/app/widgets/custom_snackbar.dart';
 import 'package:suji/core/utils/logger.dart';
 
-class ShalatController extends GetxController with StateMixin<Shalat> {
+final class ShalatController extends GetxController with StateMixin<Shalat> {
   final GetShalatTimeUsecase getShalatTimeUsecase;
   final LocationService locationService;
+  late StreamSubscription<Position> _positionStream;
 
-  ShalatController(
-      {required this.getShalatTimeUsecase, required this.locationService});
+  ShalatController({
+    required this.getShalatTimeUsecase,
+    required this.locationService,
+  });
 
   final _date = DateTime.now().obs;
   get date => DateFormat('dd MMM y').format(_date.value);
   Position? position;
-
-
 
   nextDay() async {
     if (position != null) {
@@ -37,10 +40,21 @@ class ShalatController extends GetxController with StateMixin<Shalat> {
   @override
   void onInit() async {
     super.onInit();
-    position = await Geolocator.getLastKnownPosition();
-    if (position != null) {
-      await getShalatTime(position!);
-    }
+    _positionStream =
+        Geolocator.getPositionStream().listen((newPosition) async {
+      position = newPosition;
+      await getShalatTime(newPosition);
+    });
+    // position = await Geolocator.getLastKnownPosition();
+    // if (position != null) {
+    //   await getShalatTime(position!);
+    // }
+  }
+
+  @override
+  void onClose() {
+    _positionStream.cancel();
+    super.onClose();
   }
 
   Future<void> refreshLocation() async {
@@ -56,7 +70,8 @@ class ShalatController extends GetxController with StateMixin<Shalat> {
 
   Future<void> getShalatTime(Position position) async {
     change(null, status: RxStatus.loading());
-    final dataShalatTime = await getShalatTimeUsecase.invoke(_date.value, position);
+    final dataShalatTime =
+        await getShalatTimeUsecase.invoke(_date.value, position);
 
     dataShalatTime.fold((failure) {
       Log.e('[ShalatController][dataShalatTime]', failure.message);

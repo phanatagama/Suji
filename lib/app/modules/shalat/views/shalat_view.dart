@@ -6,10 +6,11 @@ import 'package:lottie/lottie.dart';
 import 'package:suji/app/modules/shalat/controllers/notification_controller.dart';
 import 'package:suji/app/modules/shalat/controllers/shalat_controller.dart';
 import 'package:suji/app/widgets/box_placeholder.dart';
+import 'package:suji/app/widgets/ui_helper.dart';
 import 'package:suji/core/theme/colors.dart';
 import 'package:suji/core/values/constant.dart';
 
-class ShalatView extends GetView<ShalatController> {
+final class ShalatView extends GetView<ShalatController> {
   ShalatView({super.key});
 
   final notificationController = Get.find<NotificationController>();
@@ -90,13 +91,7 @@ class ShalatView extends GetView<ShalatController> {
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
                     ),
-                    onError: (_) => const Text(
-                      '-',
-                      style: TextStyle(
-                          fontSize: 16.0,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                    ),
+                    onError: (_) => UIHelper.emptyWidget(),
                   ),
                   IconButton(
                     onPressed: () async => await controller.refreshLocation(),
@@ -158,7 +153,7 @@ class ShalatView extends GetView<ShalatController> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         IconButton(
-                          onPressed: () async => controller.beforeDay(),
+                          onPressed: controller.beforeDay,
                           icon: const Icon(
                             Icons.arrow_back_ios_new,
                             size: 16.0,
@@ -176,7 +171,7 @@ class ShalatView extends GetView<ShalatController> {
                           );
                         }),
                         IconButton(
-                          onPressed: () async => controller.nextDay(),
+                          onPressed: controller.nextDay,
                           icon: const Icon(
                             Icons.arrow_forward_ios,
                             size: 16.0,
@@ -422,7 +417,12 @@ class ShalatView extends GetView<ShalatController> {
               ],
             );
           },
-          onError: (_) => LottieBuilder.asset(AppAssets.animationNotFound, width: 200.0, height: 200,fit: BoxFit.contain,),
+          onError: (_) => LottieBuilder.asset(
+            AppAssets.animationNotFound,
+            width: 200.0,
+            height: 200,
+            fit: BoxFit.contain,
+          ),
           onLoading: ListView.separated(
             itemCount: 5,
             shrinkWrap: true,
