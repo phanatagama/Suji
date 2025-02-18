@@ -16,8 +16,8 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          AppString.alQuran,
+        title: Text(
+          AppString.alQuran.tr,
           style: TextStyle(
             color: Colors.white,
             fontSize: 16.0,

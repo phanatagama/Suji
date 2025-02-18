@@ -7,6 +7,7 @@ import 'package:suji/app/modules/menu/views/menu_view.dart';
 import 'package:suji/app/modules/onboarding/splash/views/splash_view.dart';
 import 'package:suji/app/modules/search/bindings/search_binding.dart';
 import 'package:suji/app/modules/search/views/search_view.dart';
+import 'package:suji/app/modules/setting/views/setting_view.dart';
 import 'package:suji/app/modules/shalat/bindings/shalat_binding.dart';
 import 'package:suji/app/modules/shalat/views/shalat_view.dart';
 import 'package:suji/app/modules/tasbih/bindings/tasbih_binding.dart';
@@ -30,6 +31,7 @@ class AppPages {
   static const search = '/search';
   static const tasbih = '/tasbih';
   static const asmaulHusna = '/asmaul-husna';
+  static const setting = '/setting';
 
   static final routes = [
     // the LabView is for temporary directive UI Route
@@ -82,6 +84,10 @@ class AppPages {
       page: AsmaulHusnaView.new,
       binding: AsmaulHusnaBinding(),
       transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: setting,
+      page: SettingView.new,
     ),
   ];
 }

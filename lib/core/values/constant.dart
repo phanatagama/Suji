@@ -72,8 +72,9 @@ class AppString {
   static const isha = 'Isha';
   static const tasbihDigital = 'Tasbih Digital';
   static const asmaulHusna = 'Asmaul Husna';
-  static const alQuran = 'Al-Quran';
+  static const alQuran = 'Baca Al-Quran';
   static const alarm = 'Alarm';
   static const refresh = 'Refresh';
   static const surah = 'Surah';
+  static const setting = 'Setting';
 }

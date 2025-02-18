@@ -109,7 +109,7 @@ class MenuView extends GetView<MenuController> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                AppColors.darkSurface.withAlpha((255*0.1).round()),
+                AppColors.darkSurface.withAlpha((255 * 0.1).round()),
                 AppColors.darkSurface,
               ])),
           decoration: const BoxDecoration(
@@ -123,16 +123,32 @@ class MenuView extends GetView<MenuController> {
         ),
         Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('greeting'.tr,
-                  style: Get.textTheme.headlineMedium?.copyWith(
-                      fontWeight: medium, color: AppColors.onDarkSurface)),
-              Text(
-                'user'.tr,
-                style: Get.textTheme.displayMedium
-                    ?.copyWith(color: AppColors.onDarkSurface),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('greeting'.tr,
+                      style: Get.textTheme.headlineMedium?.copyWith(
+                          fontWeight: medium, color: AppColors.onDarkSurface)),
+                  Text(
+                    'user'.tr,
+                    style: Get.textTheme.displayMedium
+                        ?.copyWith(color: AppColors.onDarkSurface),
+                  ),
+                ],
+              ),
+              IconButton(
+                onPressed: () {
+                  Get.toNamed(AppPages.setting);
+                },
+                icon: const Icon(
+                  Icons.settings,
+                  size: 24.0,
+                  color: Colors.white,
+                ),
               ),
             ],
           ),
@@ -218,7 +234,7 @@ class MenuView extends GetView<MenuController> {
                                 color: AppColors.primary),
                           ),
                           Text(
-                            AppString.alQuran,
+                            AppString.alQuran.tr,
                             maxLines: 2,
                             style: Get.textTheme.bodySmall,
                             overflow: TextOverflow.ellipsis,
@@ -348,9 +364,8 @@ class MenuView extends GetView<MenuController> {
                   width: Get.width,
                   child: ElevatedButton(
                     style: ButtonStyle(
-                        shape:
-                            WidgetStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
+                        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ))),
                     onPressed: () => Get.back(),
@@ -369,5 +384,30 @@ class MenuView extends GetView<MenuController> {
       ),
       isScrollControlled: true,
     );
+  }
+}
+
+class LocaleSwitch extends StatefulWidget {
+  const LocaleSwitch({super.key});
+
+  @override
+  State<LocaleSwitch> createState() => _LocaleSwitchState();
+}
+
+class _LocaleSwitchState extends State<LocaleSwitch> {
+  bool value = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Switch.adaptive(
+        value: value,
+        onChanged: (newValue) {
+          Get.updateLocale(
+              newValue ? const Locale('id', 'ID') : const Locale('en', 'US'));
+          print(Get.locale);
+          setState(() {
+            value = newValue;
+          });
+        });
   }
 }
