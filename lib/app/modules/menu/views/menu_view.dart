@@ -109,7 +109,7 @@ class MenuView extends GetView<MenuController> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                AppColors.darkSurface.withOpacity(0.1),
+                AppColors.darkSurface.withAlpha((255*0.1).round()),
                 AppColors.darkSurface,
               ])),
           decoration: const BoxDecoration(
@@ -349,7 +349,7 @@ class MenuView extends GetView<MenuController> {
                   child: ElevatedButton(
                     style: ButtonStyle(
                         shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                            WidgetStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ))),

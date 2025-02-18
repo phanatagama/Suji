@@ -116,7 +116,7 @@ class SearchView extends GetView<MySearchController> {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
+              color: Colors.grey.withAlpha((255*0.5).round()),
               blurRadius: 5.0,
               offset: const Offset(0, 3),
             ),

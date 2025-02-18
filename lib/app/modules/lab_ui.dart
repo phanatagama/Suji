@@ -9,7 +9,7 @@ import 'dart:convert';
 import 'package:suji/core/utils/logger.dart';
 
 class Lab extends StatefulWidget {
-  Lab({super.key});
+  const Lab({super.key});
 
   @override
   State<Lab> createState() => _LabState();
@@ -125,8 +125,8 @@ class _LabState extends State<Lab> {
                           },
                           style: ButtonStyle(
                               shadowColor:
-                                  MaterialStateProperty.all(Colors.black),
-                              shape: MaterialStateProperty.all(
+                                  WidgetStateProperty.all(Colors.black),
+                              shape: WidgetStateProperty.all(
                                   const CircleBorder(
                                       side: BorderSide(
                                           color: AppColors.onPrimary,
@@ -143,7 +143,7 @@ class _LabState extends State<Lab> {
                         child: ElevatedButton(
                           onPressed: () {},
                           style: ButtonStyle(
-                              shape: MaterialStateProperty.all(
+                              shape: WidgetStateProperty.all(
                                   const CircleBorder(
                                       side: BorderSide(
                                           color: AppColors.background,
@@ -162,7 +162,7 @@ class _LabState extends State<Lab> {
                             await predictImage(dataImage2);
                           },
                           style: ButtonStyle(
-                              shape: MaterialStateProperty.all(
+                              shape: WidgetStateProperty.all(
                                   const CircleBorder(
                                       side: BorderSide(
                                           color: AppColors.background,

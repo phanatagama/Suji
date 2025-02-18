@@ -55,7 +55,7 @@ InputDecorationTheme get inputDecorationTheme => InputDecorationTheme(
       fillColor: AppColors.background,
       focusColor: AppColors.background,
       hintStyle: textTheme.bodyMedium!.copyWith(
-        color: AppColors.primary.withOpacity(0.7),
+        color: AppColors.primary.withAlpha((255*0.7).round()),
       ),
       errorStyle: textTheme.bodySmall!.copyWith(
         color: AppColors.error,

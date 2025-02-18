@@ -227,8 +227,8 @@ class TasbihView extends GetView<TasbihController> {
               controller.counter++;
             },
             style: ButtonStyle(
-                shadowColor: MaterialStateProperty.all(Colors.black),
-                shape: MaterialStateProperty.all(const CircleBorder(
+                shadowColor: WidgetStateProperty.all(Colors.black),
+                shape: WidgetStateProperty.all(const CircleBorder(
                     side: BorderSide(color: AppColors.onPrimary, width: 2.0)))),
             child: const Icon(
               Icons.keyboard_arrow_up,
@@ -245,7 +245,7 @@ class TasbihView extends GetView<TasbihController> {
               controller.counter--;
             },
             style: ButtonStyle(
-                shape: MaterialStateProperty.all(const CircleBorder(
+                shape: WidgetStateProperty.all(const CircleBorder(
                     side:
                         BorderSide(color: AppColors.background, width: 2.0)))),
             child: const Icon(
@@ -263,7 +263,7 @@ class TasbihView extends GetView<TasbihController> {
               controller.counter = 0;
             },
             style: ButtonStyle(
-                shape: MaterialStateProperty.all(const CircleBorder(
+                shape: WidgetStateProperty.all(const CircleBorder(
                     side:
                         BorderSide(color: AppColors.background, width: 2.0)))),
             child: const Icon(

@@ -5,7 +5,7 @@ import 'package:suji/core/theme/colors.dart';
 import 'package:suji/core/values/constant.dart';
 
 class SplashView extends StatefulWidget {
-  const SplashView({Key? key}) : super(key: key);
+  const SplashView({super.key});
 
   @override
   State<SplashView> createState() => _SplashViewState();

@@ -12,7 +12,7 @@ import 'package:suji/core/values/constant.dart';
 import '../controllers/surah_controller.dart';
 
 class SurahView extends GetView<SurahController> {
-  const SurahView({Key? key}) : super(key: key);
+  const SurahView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -235,7 +235,7 @@ class SurahView extends GetView<SurahController> {
             end: Alignment.bottomRight,
             colors: [
               const Color(0xFFDF98FA),
-              const Color(0xFF9055FF).withOpacity(0.5),
+              const Color(0xFF9055FF).withAlpha((255*0.5).round()),
             ],
           ),
         ),
@@ -350,7 +350,7 @@ class SurahView extends GetView<SurahController> {
                   child: ElevatedButton(
                     style: ButtonStyle(
                         shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                            WidgetStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ))),
