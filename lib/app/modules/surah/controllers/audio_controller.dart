@@ -40,6 +40,8 @@ class AudioController extends GetxController {
     _audioPlayer.dispose();
     super.dispose();
   }
+  Rx<Duration?> duration = Duration.zero.obs;
+  Rx<Duration?> position = Duration.zero.obs;
 
   void setupAudioPlayer() {
     AudioLogger.logLevel = AudioLogLevel.error;
@@ -49,12 +51,10 @@ class AudioController extends GetxController {
       resetSelectedAudioIdx();
     });
     _durationSubscription = audioPlayer.onDurationChanged.listen((Duration d) {
-      // print('onDurationChanged $d wkwkwk!!!');
-      // audioPlayer.state = PlayerState.completed;
+      duration.value = d;
     });
     _positionSubscription = audioPlayer.onPositionChanged.listen((Duration p) {
-      // print('onPositionChanged $p wkwkwk!!!');
-      // audioPlayer.state = PlayerState.completed;
+      position.value = p;
     });
     _playerStateSubscription =
         audioPlayer.onPlayerStateChanged.listen((PlayerState s) {});

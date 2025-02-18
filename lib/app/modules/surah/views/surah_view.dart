@@ -95,51 +95,84 @@ class SurahView extends GetView<SurahController> {
                     Radius.circular(10.r),
                   ),
                 ),
-                child: Padding(
+                child: Container(
                   padding: EdgeInsets.all(10.w),
-                  child: Row(
+                  child: Column(
                     children: [
-                      CircleAvatar(
-                        radius: 16.r,
-                        backgroundColor: AppColors.primaryContainer,
-                        child: Text(
-                          '${ayah.versesNumberInSurah}',
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            fontWeight: medium,
-                            color: Colors.white,
+                      Row(
+                        children: [
+                          CircleAvatar(
+                            radius: 16.r,
+                            backgroundColor: AppColors.primaryContainer,
+                            child: Text(
+                              '${ayah.versesNumberInSurah}',
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: medium,
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
-                        ),
+                          const Spacer(),
+                          IconButton(
+                            tooltip: 'Bagikan',
+                            onPressed: () {
+                              final textAyah = '''
+                                  Surah : ${ayah.nameTransliterationId}
+                                  Ayah : ${ayah.versesNumberInSurah}
+                                  ${ayah.versesTextArab}
+                                  Tafsir:
+                                  ${ayah.versesTafsirIdShort}''';
+                              Share.share(textAyah);
+                            },
+                            icon: const Icon(
+                              Icons.share,
+                              color: AppColors.primary,
+                            ),
+                          ),
+                          AudioPlayerWidget(
+                            index: index,
+                            ayah: ayah,
+                          ),
+                          IconButton(
+                            tooltip: 'Tafsir',
+                            onPressed: () => _showTafsirBottomsheet(
+                                ayah.versesTafsirIdShort),
+                            icon: const Icon(
+                              Icons.document_scanner,
+                              color: AppColors.primary,
+                            ),
+                          ),
+                        ],
                       ),
-                      const Spacer(),
-                      IconButton(
-                        tooltip: 'Bagikan',
-                        onPressed: () {
-                          final textAyah = '''
-                              Surah : ${ayah.nameTransliterationId}
-                              Ayah : ${ayah.versesNumberInSurah}
-                              ${ayah.versesTextArab}
-                              Tafsir:
-                              ${ayah.versesTafsirIdShort}''';
-                          Share.share(textAyah);
+                      GetX<AudioController>(
+                        builder: (controller) {
+                          if (controller.selectedAudioIdx != index) {
+                            return const SizedBox.shrink();
+                          }
+                          return Slider(
+                            activeColor: AppColors.primaryContainer,
+                            onChanged: (value) {
+                              final duration = controller.duration.value;
+                              if (duration == null) {
+                                return;
+                              }
+                              final position = value * duration.inMilliseconds;
+                              controller.audioPlayer.seek(
+                                  Duration(milliseconds: position.round()));
+                            },
+                            value: (controller.position.value != null &&
+                                    controller.duration.value != null &&
+                                    controller.position.value!.inMilliseconds >
+                                        0 &&
+                                    controller.position.value!.inMilliseconds <
+                                        controller
+                                            .duration.value!.inMilliseconds)
+                                ? controller.position.value!.inMilliseconds /
+                                    controller.duration.value!.inMilliseconds
+                                : 0.0,
+                          );
                         },
-                        icon: const Icon(
-                          Icons.share,
-                          color: AppColors.primary,
-                        ),
-                      ),
-                      AudioPlayerWidget(
-                        index: index,
-                        ayah: ayah,
-                      ),
-                      IconButton(
-                        tooltip: 'Tafsir',
-                        onPressed: () =>
-                            _showTafsirBottomsheet(ayah.versesTafsirIdShort),
-                        icon: const Icon(
-                          Icons.document_scanner,
-                          color: AppColors.primary,
-                        ),
                       ),
                     ],
                   ),
@@ -235,7 +268,7 @@ class SurahView extends GetView<SurahController> {
             end: Alignment.bottomRight,
             colors: [
               const Color(0xFFDF98FA),
-              const Color(0xFF9055FF).withAlpha((255*0.5).round()),
+              const Color(0xFF9055FF).withAlpha((255 * 0.5).round()),
             ],
           ),
         ),
@@ -349,9 +382,8 @@ class SurahView extends GetView<SurahController> {
                   width: Get.width,
                   child: ElevatedButton(
                     style: ButtonStyle(
-                        shape:
-                            WidgetStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
+                        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ))),
                     onPressed: () => Get.back(),
