@@ -25,8 +25,8 @@ class SurahLocalDataSourceImpl implements SurahLocalDataSource {
   SurahLocalDataSourceImpl({required this.databaseHelper});
 
   @override
-  Future<List<Surah>> getAllSurah() async {
-    return await databaseHelper.getAllSurah();
+  Future<List<Surah>> getAllSurah() {
+    return databaseHelper.getAllSurah();
   }
 
   @override
@@ -54,8 +54,8 @@ class SurahLocalDataSourceImpl implements SurahLocalDataSource {
   }
 
   @override
-  Future<List<SurahDetail>> getAyahBySurahNumber(int surahNumber) async {
-    return await databaseHelper.getAyahBySurahNumber(surahNumber);
+  Future<List<SurahDetail>> getAyahBySurahNumber(int surahNumber) {
+    return databaseHelper.getAyahBySurahNumber(surahNumber);
   }
 
   @override
@@ -79,7 +79,7 @@ class SurahLocalDataSourceImpl implements SurahLocalDataSource {
   }
 
   @override
-  Future<List<Surah>> getSurahByQuery(String query) async {
-    return await databaseHelper.getSurahByQuery(query);
+  Future<List<Surah>> getSurahByQuery(String query) {
+    return databaseHelper.getSurahByQuery(query);
   }
 }

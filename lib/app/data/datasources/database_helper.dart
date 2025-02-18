@@ -32,12 +32,12 @@ class DatabaseHelper {
   /// [Shalat] transactional
   Future<Shalat?> getShalatTime(int id) async {
     final db = await database;
-    return await db?.shalats.get(id);
+    return db?.shalats.get(id);
   }
 
   Future<Shalat?> getShalatTimeByDate(String date) async {
     final db = await database;
-    return await db?.shalats.filter().dateReadableEqualTo(date).findFirst();
+    return db?.shalats.filter().dateReadableEqualTo(date).findFirst();
   }
 
   Future<void> insertOrUpdateShalat(List<Shalat> shalat) async {
@@ -51,12 +51,12 @@ class DatabaseHelper {
   /// [Surah] Transactional
   Future<List<Surah>> getAllSurah() async {
     final db = await database;
-    return await db!.surahs.where().sortByNumber().findAll();
+    return db!.surahs.where().sortByNumber().findAll();
   }
 
   Future<List<SurahDetail>> getAyahBySurahNumber(int surahNumber) async {
     final db = await database;
-    return await db!.surahDetails
+    return db!.surahDetails
         .filter()
         .numberEqualTo(surahNumber)
         .sortByVersesNumberInSurah()
@@ -79,7 +79,7 @@ class DatabaseHelper {
 
   Future<List<Surah>> getSurahByQuery(String query) async {
     final db = await database;
-    return await db!.surahs
+    return db!.surahs
         .filter()
         .nameTransliterationIdContains(query, caseSensitive: false)
         .sortByNumber()

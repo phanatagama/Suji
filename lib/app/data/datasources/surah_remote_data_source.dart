@@ -26,11 +26,11 @@ class SurahRemoteDataSourceImpl extends GetConnect
       if (response.isOk) {
         return ListSurah.fromJson(response.body);
       } else {
-        Log.e('[SurahRemoteDataSource][getAllSurah]', '${response.statusCode}');
+        Log.e('[$runtimeType][getAllSurah]', '${response.statusCode}');
         return errorHandler(response);
       }
     } catch (e) {
-      Log.e('[SurahRemoteDataSource][getAllSurah]', e.toString());
+      Log.e('[$runtimeType][getAllSurah]', e.toString());
       throw ServerException(e.toString());
     }
   }

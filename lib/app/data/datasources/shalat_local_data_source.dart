@@ -18,11 +18,11 @@ class ShalatLocalDataSourceImpl implements ShalatLocalDataSource {
   ShalatLocalDataSourceImpl({required this.databaseHelper});
 
   @override
-  Future<Shalat?> getShalatTime(DateTime dateTime, Position position) async {
+  Future<Shalat?> getShalatTime(DateTime dateTime, Position position) {
     final date = DateFormat('dd MMM y').format(dateTime);
     Log.d('[ShalatLocalDataSourceImpl][getShalatTime]', date);
     final int id = '$date${position.latitude}${position.longitude}'.fastHash();
-    return await databaseHelper.getShalatTime(id);
+    return databaseHelper.getShalatTime(id);
   }
 
   @override
@@ -36,8 +36,8 @@ class ShalatLocalDataSourceImpl implements ShalatLocalDataSource {
   }
 
   @override
-  Future<Shalat?> getShalatTimeByDate(DateTime dateTime) async {
+  Future<Shalat?> getShalatTimeByDate(DateTime dateTime) {
     final date = DateFormat('dd MMM y').format(dateTime);
-    return await databaseHelper.getShalatTimeByDate(date);
+    return databaseHelper.getShalatTimeByDate(date);
   }
 }
