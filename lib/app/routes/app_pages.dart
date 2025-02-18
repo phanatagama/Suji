@@ -22,6 +22,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
+  // ignore: constant_identifier_names
   static const INITIAL = Routes.HOME;
   static const menu = '/menu';
   static const splash = '/splash';
@@ -33,49 +34,55 @@ class AppPages {
 
   static final routes = [
     // the LabView is for temporary directive UI Route
-    GetPage(name: lab, page: () =>  Lab()),
-    GetPage(name: splash, page: () => const SplashView(), transition: Transition.zoom),
+    GetPage(
+      name: lab,
+      page: Lab.new,
+    ),
+    GetPage(
+      name: splash,
+      page: SplashView.new,
+      transition: Transition.zoom,
+    ),
     GetPage(
       name: _Paths.HOME,
-      page: () => const HomeView(),
+      page: HomeView.new,
       binding: HomeBinding(),
-      transition: Transition.rightToLeft
+      transition: Transition.rightToLeft,
     ),
     GetPage(
       name: '${_Paths.SURAH}/:number',
-      page: () => const SurahView(),
+      page: SurahView.new,
       binding: SurahBinding(),
-      transition: Transition.rightToLeft
+      transition: Transition.rightToLeft,
     ),
     GetPage(
       name: search,
-      page: () => const SearchView(),
+      page: SearchView.new,
       binding: SearchBinding(),
-      transition: Transition.rightToLeft
+      transition: Transition.rightToLeft,
     ),
     GetPage(
       name: shalat,
-      page: () => ShalatView(),
+      page: ShalatView.new,
       binding: ShalatBinding(),
-      transition: Transition.rightToLeft
+      transition: Transition.rightToLeft,
     ),
     GetPage(
-      name: menu,
-      page: () => const MenuView(),
-      binding: MenuBinding(),
-      transition: Transition.zoom
-    ),
+        name: menu,
+        page: MenuView.new,
+        binding: MenuBinding(),
+        transition: Transition.zoom),
     GetPage(
       name: tasbih,
-      page: () => const TasbihView(),
+      page: TasbihView.new,
       binding: TasbihBinding(),
-      transition: Transition.rightToLeft
+      transition: Transition.rightToLeft,
     ),
     GetPage(
       name: asmaulHusna,
-      page: () => const AsmaulHusnaView(),
+      page: AsmaulHusnaView.new,
       binding: AsmaulHusnaBinding(),
-      transition: Transition.rightToLeft
+      transition: Transition.rightToLeft,
     ),
   ];
 }

@@ -11,9 +11,8 @@ import 'package:suji/core/theme/colors.dart';
 import 'package:suji/core/values/constant.dart';
 
 final class ShalatView extends GetView<ShalatController> {
-  ShalatView({super.key});
+  const ShalatView({super.key});
 
-  final notificationController = Get.find<NotificationController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -185,6 +184,7 @@ final class ShalatView extends GetView<ShalatController> {
           top: 8.0,
           right: 8.0,
           child: Obx(() {
+            final notificationController = Get.find<NotificationController>();
             if (notificationController.isAlarmActive) {
               return IconButton(
                 onPressed: () => controller.status.isSuccess
