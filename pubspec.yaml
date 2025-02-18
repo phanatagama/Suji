@@ -1,5 +1,5 @@
 name: suji
-version: 1.0.0+1
+version: 1.1.0
 publish_to: none
 description: Suka Ngaji is Application for all moslem to read quran and set up Adzan alarm.
 environment:
@@ -10,29 +10,29 @@ dependencies:
   cupertino_icons: ^1.0.8
   android_alarm_manager_plus: ^3.0.2
   flutter_local_notifications: ^18.0.1
-  audioplayers: ^5.1.0
+  audioplayers: ^6.1.2
   connectivity_plus: ^4.0.2
   dartz: 0.10.1
-  equatable: 2.0.5
-  flutter_screenutil: 5.9.0
-  freezed_annotation: ^2.4.1
+  equatable: 2.0.7
+  flutter_screenutil: 5.9.3
+  freezed_annotation: ^2.4.4
   get: 4.7.2
   geolocator: ^10.0.0
   intl: ^0.18.1
-  json_annotation: ^4.8.1
-  share_plus: ^7.1.0
+  json_annotation: ^4.9.0
+  share_plus: ^10.1.4
   shimmer: 3.0.0
   flutter:
     sdk: flutter
   isar: ^3.1.0+1
   isar_flutter_libs: ^3.1.0+1
-  path_provider: ^2.1.0
+  path_provider: ^2.1.5
   rxdart: ^0.27.7
   hive: ^2.2.3
-  logger: ^2.0.1
+  logger: ^2.5.0
   auto_size_text: ^3.0.0
   sklite: ^1.0.0
-  lottie: ^2.6.0
+  lottie: ^3.3.1
   
 
 dev_dependencies:
@@ -43,7 +43,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   isar_generator: ^3.1.0+1
-  mockito: ^5.4.2
+  mockito: ^5.4.5
 
 dependency_overrides:
   analyzer: ^6.0.0
