@@ -6,7 +6,7 @@ import 'package:suji/app/modules/surah/controllers/audio_controller.dart';
 
 import '../controllers/surah_controller.dart';
 
-class SurahBinding extends Bindings {
+class SurahBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut<SurahController>(

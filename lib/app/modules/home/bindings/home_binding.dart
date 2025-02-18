@@ -4,7 +4,7 @@ import 'package:suji/app/domain/usescases/get_all_surah_usecase.dart';
 
 import '../controllers/home_controller.dart';
 
-class HomeBinding extends Bindings {
+class HomeBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut<HomeController>(

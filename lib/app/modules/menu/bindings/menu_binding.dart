@@ -9,7 +9,7 @@ import 'package:suji/app/domain/repository/surah_repository.dart';
 import 'package:suji/app/domain/usescases/get_daily_pray_usecase.dart';
 import 'package:suji/app/modules/menu/controllers/menu_controller.dart';
 
-class MenuBinding extends Bindings {
+class MenuBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut<MenuController>(
