@@ -11,7 +11,7 @@
   <p align="center">
     Suji is a Muslim application for reading the Quran and prayer reminders.
     <br />
-    <a href="https://github.com/phanatagama/Suji/releases/download/v.1.0.0/app-debug.apk">Download App</a>
+    <a href="https://github.com/phanatagama/Suji/releases/download/1.0.2/app-debug.apk">Download App</a>
     ·
     <a href="https://github.com/phanatagama/Suji/issues/new">Report Bug</a>
     ·
